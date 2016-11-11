@@ -15,6 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FoodSearch_Ref"/>
+        <activity android:name=".MainAdmin"/>
+        <activity android:name=".FoodListView"/>
+        <activity android:name=".FoodSearch_Hash"/>
+        <activity android:name=".FoodSearch_Random"/>
+        <activity android:name=".MainLogin"/>
+        <activity android:name=".ShoppingBasket"/>
     </application>
 
 </manifest>
