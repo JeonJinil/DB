@@ -47,7 +47,6 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
             if(tempbutton == newbutton){
                 ArrayList<String> food_name = dbHelper.food_search_by_ref(data[num]);
                 Toast.makeText(getApplicationContext(),data[num] +"으로 만들수 있는 요리는 :"+food_name ,Toast.LENGTH_LONG).show();
-
             }
             num++;
         }

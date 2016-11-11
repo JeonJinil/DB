@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent_admin = new Intent(MainActivity.this,FoodSearch_Ref.class);
+        Intent intent_admin = new Intent(this,MainLogin.class);
         startActivity(intent_admin);
     }
 }
