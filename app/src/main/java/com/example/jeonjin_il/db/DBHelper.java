@@ -5,8 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 /**
@@ -25,8 +27,10 @@ public class DBHelper extends SQLiteOpenHelper {
         // 새로운 테이블 생성
         //USER (table 이름)
         //key(pk,int) , id (text) , pw (text)  (어트리뷰트)
-        db.execSQL("CREATE TABLE FOOD (_key INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " name TEXT, type INTEGER, material TEXT, tag TEXT);");
+
+            db.execSQL("CREATE TABLE FOOD (_key INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    " name TEXT, type INTEGER, material TEXT, tag TEXT);");
+
 
    }
 
@@ -80,22 +84,6 @@ public class DBHelper extends SQLiteOpenHelper {
         //미구현
 //        db.execSQL("DELETE FROM MONEYBOOK WHERE item='" + item + "';");
         db.close();
-    }
-
-    public int Login(String id, String pw) {
-        // 읽기가 가능하게 DB 열기
-        SQLiteDatabase db = getReadableDatabase();
-
-        // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM USER", null);
-
-        while(cursor.moveToNext()){
-            if(cursor.getString(1).equals(id) && cursor.getString(2).equals(pw) ){
-                Log.d("TAG", String.valueOf(cursor.getInt(0))+"DBHelper");
-                return cursor.getInt(0);
-            }
-        }
-        return -1;
     }
 }
 

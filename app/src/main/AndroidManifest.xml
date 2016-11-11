@@ -22,6 +22,7 @@
         <activity android:name=".FoodSearch_Random"/>
         <activity android:name=".MainLogin"/>
         <activity android:name=".ShoppingBasket"/>
+        <activity android:name=".RegisterActivity"/>
     </application>
 
 </manifest>
