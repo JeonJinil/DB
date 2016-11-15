@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,21 +65,18 @@ public class MainLogin extends AppCompatActivity {
         }
         else{
             Toast.makeText(getApplicationContext(),"응 맞아~",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, FoodSearch_Ref.class);
-            startActivity(intent);
+            finish();
+//            Intent intent = new Intent(this, FoodSearch_Ref.class);
+//            startActivity(intent);
 
-            Explode explode = new Explode();
-            explode.setDuration(500);
-            getWindow().setExitTransition(explode);
-            getWindow().setEnterTransition(explode);
-            ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-            Intent i2 = new Intent(this,FoodSearch_Ref.class);
-            startActivity(i2, oc2.toBundle());
+//            Explode explode = new Explode();
+//            explode.setDuration(500);
+//            getWindow().setExitTransition(explode);
+//            getWindow().setEnterTransition(explode);
+//            ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+//            Intent i2 = new Intent(this,FoodSearch_Ref.class);
+//            startActivity(i2, oc2.toBundle());
         }
-
-
-
-
 
 
 
