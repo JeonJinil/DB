@@ -6,12 +6,13 @@ package com.example.jeonjin_il.db;
 
 public class ShoppingItem {
     String name=null;
+    int num = 0;
     boolean selected=false;
 
-    public ShoppingItem(String name,boolean selected)
+    public ShoppingItem(String name,int num,boolean selected)
     {
         this.name=name;
-
+        this.num = num;
         this.selected=selected;
     }
     public String getName() {
@@ -21,6 +22,13 @@ public class ShoppingItem {
         this.name=name;
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
 
     public boolean isSelected()
     {

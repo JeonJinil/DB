@@ -14,6 +14,14 @@
         android:focusableInTouchMode="false"
         android:text="CheckBox" />
 
+    <TextView
+        android:text="10101010"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="82dp"
+        android:id="@+id/shopping_item_textview" />
 
 
 </RelativeLayout>

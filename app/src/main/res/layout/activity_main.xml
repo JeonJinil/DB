@@ -51,4 +51,15 @@
         android:layout_alignStart="@+id/main_button_hash"
         android:layout_marginTop="24dp"
         android:id="@+id/main_button_basket" />
+
+    <Button
+        android:text="짱구꺼 데이터 넣기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:id="@+id/main_button_insert"
+        android:layout_below="@+id/main_button_basket"
+        android:layout_alignStart="@+id/main_button_basket" />
+
+
 </RelativeLayout>

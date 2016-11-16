@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,29 +38,38 @@ public class ShoppingBasket extends AppCompatActivity {
     private void displayListView()
     {
         dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
-        Log.d("TAG","1");
-//        dbHelper.makeBasket();
-//        dbHelper.basket_insert("user01","@김@밥@햄@단무지");
-        Log.d("TAG","2");
-        //테스트데이터 basket table에 넣으려면 dbHelper.basket_insert(id,material)
-        //자꾸 displayListView()가 호출되서 같은데이터가 계속넣어지게되어 데이터몇개넣고
-        //insert하는 구문 지운거임
-
-
-
 
         ArrayList<ShoppingItem> ShoppingList=new ArrayList<ShoppingItem>();
         ShoppingItem item;
 
         ArrayList<String> list = dbHelper.material_list("user01");
-        Log.d("TAG",list.toString());
 
-        while(!list.isEmpty()) {
+        Integer temp[] = new Integer[list.size()];
+        for(int i=0;i<list.size();i++){
+            temp[i] = 1;
+        }
 
-            item = new ShoppingItem(list.get(0).toString(), false);
-            list.remove(0);
+
+        for(int i=0;i<list.size()-1;i++){
+            if(temp[i] == -1)
+                continue;
+            for(int j=i+1;j<list.size();j++){
+                if(list.get(i).equals(list.get(j))){
+                    temp[i]++;
+                    temp[j] = -1;
+                }
+            }
+        }
+
+        Log.d("NUM","finish");
+
+
+        for(int num = 0;num < list.size();num++){
+            if(temp[num] == -1)
+                continue;
+            item = new ShoppingItem(list.get(num),temp[num], false);
             ShoppingList.add(item);
-            Log.d("TAG",item.getName());
+            Log.d("NUM",Integer.toString(item.getNum()));
         }
         dataAdapter=new MyAdapter(this,R.layout.activity_shoppingitem,ShoppingList);
         ListView listView=(ListView)findViewById(R.id.shopping_list);
@@ -74,9 +84,9 @@ public class ShoppingBasket extends AppCompatActivity {
             }
         });
     }
+
     private class MyAdapter extends ArrayAdapter<ShoppingItem> {
         private ArrayList<ShoppingItem> ShoppingList;
-
         public MyAdapter(Context context, int Resourceid, ArrayList<ShoppingItem> ShoppingList) {
             super(context, Resourceid, ShoppingList);
             this.ShoppingList = new ArrayList<ShoppingItem>();
@@ -85,18 +95,19 @@ public class ShoppingBasket extends AppCompatActivity {
 
         private class ViewHolder {
             CheckBox name;
+            TextView textView;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
-            Log.v("ConvertView", String.valueOf(position));
             if (convertView == null) {
                 LayoutInflater v = (LayoutInflater) getSystemService
                         (Context.LAYOUT_INFLATER_SERVICE);
                 convertView = v.inflate(R.layout.activity_shoppingitem, null);
                 holder = new ViewHolder();
                 holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+                holder.textView = (TextView) convertView.findViewById(R.id.shopping_item_textview);
 
                 convertView.setTag(holder);
                 holder.name.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +128,8 @@ public class ShoppingBasket extends AppCompatActivity {
             holder.name.setText(item.getName());
             holder.name.setChecked(item.isSelected());
             holder.name.setTag(item);
+            Log.d("NUM",Integer.toString(item.getNum()));
+            holder.textView.setText(Integer.toString(item.getNum()));
             return convertView;
         }
     }

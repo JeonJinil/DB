@@ -27,8 +27,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE USER (_key INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "id TEXT,pw TEXT, num INTEGER);");
 
-//        db.execSQL("CREATE TABLE BASKET(_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
-//                " basket_id TEXT, material TEXT);");
+        db.execSQL("CREATE TABLE BASKET (_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                " basket_id TEXT, material TEXT);");
     }
 
     @Override
@@ -91,6 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO FOOD VALUES(null, '" + name + "', '" + type + "', '" + material + "', '" + tag + "');");
         db.close();
     }
+
     public ArrayList<String> food_search_by_ref(String select_input){
         ArrayList<String> ret = new ArrayList<String>();
         SQLiteDatabase db = getReadableDatabase();
@@ -129,12 +130,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 ////////////////////////////////////////////////////////////////짱구
 
-    public void makeBasket(){
-        SQLiteDatabase db=getWritableDatabase();
-        db.execSQL("CREATE TABLE BASKET(_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                " basket_id TEXT, material TEXT);");
-        db.close();
-    }
 
     public void basket_insert(String basket_id,String material){
         SQLiteDatabase db=getWritableDatabase();
