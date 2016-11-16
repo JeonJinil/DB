@@ -27,6 +27,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE USER (_key INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "id TEXT,pw TEXT, num INTEGER);");
 
+//        db.execSQL("CREATE TABLE BASKET(_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
+//                " basket_id TEXT, material TEXT);");
     }
 
     @Override
@@ -45,13 +47,18 @@ public class DBHelper extends SQLiteOpenHelper {
         while(st.hasMoreTokens())
                 temp.add(st.nextToken());
 
+        for(int i=0;i<temp.size();i++){
+            Log.d("TAG","temp "+temp.get(i));
+        }
+
         int num = 0;
         while(cursor.moveToNext()){
-            StringTokenizer st2 = new StringTokenizer(cursor.getString(1),"@");
+            StringTokenizer st2 = new StringTokenizer(cursor.getString(0),"#");
             while(st2.hasMoreTokens()){
                 boolean flag= false;
+                String now_str = st2.nextToken();
                 for(int i=0;i<temp.size();i++){
-                    if(st2.nextToken().equals(temp.get(i))) {
+                    if(now_str.equals(temp.get(i))) {
                         ret.add(num);
                         flag = true;
                         break;
@@ -120,6 +127,49 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return -1;
     }
+////////////////////////////////////////////////////////////////짱구
+
+    public void makeBasket(){
+        SQLiteDatabase db=getWritableDatabase();
+        db.execSQL("CREATE TABLE BASKET(_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                " basket_id TEXT, material TEXT);");
+        db.close();
+    }
+
+    public void basket_insert(String basket_id,String material){
+        SQLiteDatabase db=getWritableDatabase();
+
+        db.execSQL("INSERT INTO BASKET VALUES(null,'"+ basket_id +"','"+ material +"')");
+        db.close();
+    }
+
+    public ArrayList<String> material_list(String id){
+        ArrayList<String> ret = new ArrayList<String>();
+        SQLiteDatabase db=getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT basket_id,material FROM BASKET ",null);
+
+        while(cursor.moveToNext()) {
+            if (cursor.getString(0).equals(id)) {
+                StringTokenizer st = new StringTokenizer(cursor.getString(1), "@");
+                while (st.hasMoreTokens())
+                    ret.add(st.nextToken());
+                break;
+            }
+        }
+        return ret;
+    }
+
+    public void updateBasket(String material1)
+    {
+        SQLiteDatabase db=getWritableDatabase();
+        db.execSQL("UPDATE BASKET SET material='"+ material1 +"' WHERE basket_id="+"'user01';");
+        //db.execSQL("INSERT INTO BASKET VALUES(null,'"+ basket_id +"','"+ material +"')");
+        db.close();
+    }
+
+
+
+
 }
 
 

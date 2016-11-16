@@ -10,4 +10,6 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="next">NEXT</string>
     <string name="register">REGISTER</string>
+    <string name="basket_name">ListView Checkboxes</string>
+    <string name="some_text">"Your basket"</string>
 </resources>

@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button go_ref , go_ran , go_hash;
+    Button go_ref , go_ran , go_hash , go_basket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         go_ref = (Button) findViewById(R.id.main_button_ref);
         go_ran = (Button)findViewById(R.id.main_button_random);
         go_hash = (Button) findViewById(R.id.main_button_hash);
+        go_basket = (Button) findViewById(R.id.main_button_basket);
 
         go_ref.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        go_basket.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),ShoppingBasket.class);
+                startActivity(intent);
+            }
+        });
+
         Intent intent_admin = new Intent(this,MainLogin.class);
         startActivity(intent_admin);
     }

@@ -42,4 +42,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:id="@+id/main_button_hash" />
+
+    <Button
+        android:text="장바구니 보기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_button_hash"
+        android:layout_alignStart="@+id/main_button_hash"
+        android:layout_marginTop="24dp"
+        android:id="@+id/main_button_basket" />
 </RelativeLayout>
