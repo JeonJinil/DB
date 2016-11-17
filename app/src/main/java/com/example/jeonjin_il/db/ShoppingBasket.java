@@ -69,7 +69,6 @@ public class ShoppingBasket extends AppCompatActivity {
                 continue;
             item = new ShoppingItem(list.get(num),temp[num], false);
             ShoppingList.add(item);
-            Log.d("NUM",Integer.toString(item.getNum()));
         }
         dataAdapter=new MyAdapter(this,R.layout.activity_shoppingitem,ShoppingList);
         ListView listView=(ListView)findViewById(R.id.shopping_list);

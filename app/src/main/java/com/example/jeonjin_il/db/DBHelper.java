@@ -29,6 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE BASKET (_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 " basket_id TEXT, material TEXT);");
+        Log.d("TAG","this is onCreate in DBHelper");
     }
 
     @Override

@@ -61,5 +61,14 @@
         android:layout_below="@+id/main_button_basket"
         android:layout_alignStart="@+id/main_button_basket" />
 
+    <Button
+        android:text="요리 리스트 보기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_button_insert"
+        android:layout_toEndOf="@+id/main_button_ref"
+        android:layout_marginTop="11dp"
+        android:id="@+id/main_button_list" />
+
 
 </RelativeLayout>

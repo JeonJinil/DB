@@ -23,6 +23,7 @@
         <activity android:name=".MainLogin"/>
         <activity android:name=".ShoppingBasket"/>
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".FoodDetail"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
