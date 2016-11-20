@@ -17,7 +17,13 @@
     <item name="android:windowIsTranslucent">true</item>
 
 </style>
-<style name="TextLabel" parent="Theme.AppCompat.Light">
+    <style name="Transpa" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+    </style>
+
+    <style name="TextLabel" parent="Theme.AppCompat.Light">
     <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
     <item name="colorControlActivated">#FFCC00</item>
 </style>
