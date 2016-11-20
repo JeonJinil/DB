@@ -3,12 +3,47 @@ package com.example.jeonjin_il.db;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     Button go_ref , go_ran , go_hash , go_basket ,go_list;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    switch(item.getItemId()){
+        case R.id.action_search :
+            return true;
+        case R.id.action_fridge:
+            Intent intent = new Intent(getApplication(),FoodSearch_Ref.class);
+            startActivity(intent);
+            return true;
+        case R.id.action_login :
+            Intent intent_login = new Intent(this,MainLogin.class);
+            startActivity(intent_login);
+            return true;
+        case R.id.action_cart:
+            Intent intent_cart=  new Intent(this,ShoppingBasket.class);
+            startActivity(intent_cart);
+            return true;
+
+        default:
+            return super.onOptionsItemSelected(item);
+    }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button temp  = (Button) findViewById(R.id.main_button_insert);
         temp.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -67,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 dbHelper.basket_insert("user01","@김@밥@김@햄@단무지");
             }
         });
-        Intent intent_admin = new Intent(this,MainLogin.class);
-        startActivity(intent_admin);
+
 
 
 

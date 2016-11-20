@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DB</string>
+    <string name="app_name"></string>
 
     <string name="login_success">login success</string>
     <string name="login">LOGIN</string>

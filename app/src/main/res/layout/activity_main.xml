@@ -9,17 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.jeonjin_il.db.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView2" />
-
     <Button
         android:text="냉장고 검색"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="31dp"
         android:layout_marginTop="84dp"

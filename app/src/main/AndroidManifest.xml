@@ -16,11 +16,12 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".FoodSearch_Ref"/>
-        <activity android:name=".MainAdmin"/>
+        <activity android:name=".MainAdmin" />
         <activity android:name=".FoodListView"/>
         <activity android:name=".FoodSearch_Hash"/>
         <activity android:name=".FoodSearch_Random"/>
-        <activity android:name=".MainLogin"/>
+        <activity android:name=".MainLogin"
+            android:theme="@style/Translucent"/>
         <activity android:name=".ShoppingBasket"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".FoodDetail"/>
@@ -32,5 +33,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

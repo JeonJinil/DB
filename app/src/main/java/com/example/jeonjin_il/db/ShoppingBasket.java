@@ -1,10 +1,14 @@
 package com.example.jeonjin_il.db;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,6 +29,36 @@ public class ShoppingBasket extends AppCompatActivity {
     MyAdapter dataAdapter=null;
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_search :
+                return true;
+            case R.id.action_fridge:
+                Intent intent = new Intent(getApplication(),FoodSearch_Ref.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_login :
+                Intent intent_login = new Intent(this,MainLogin.class);
+                startActivity(intent_login);
+                return true;
+            case R.id.action_cart:
+                Intent intent_cart=  new Intent(this,ShoppingBasket.class);
+                startActivity(intent_cart);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
