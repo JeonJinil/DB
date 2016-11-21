@@ -21,15 +21,24 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE FOOD (_key INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " name TEXT, type INTEGER, material TEXT, tag TEXT);");
+        db.execSQL("CREATE TABLE USER ( user_id TEXT PRIMARY KEY, pw TEXT, sex TEXT);");
 
-        db.execSQL("CREATE TABLE USER (_key INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "id TEXT,pw TEXT, sex TEXT);");
+        db.execSQL("CREATE TABLE FOOD ( food_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " food_name TEXT, food_type INTEGER );");
 
-        db.execSQL("CREATE TABLE BASKET (_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                " basket_id TEXT, material TEXT);");
-        Log.d("TAG","this is onCreate in DBHelper");
+        db.execSQL("CREATE TABLE BASKET ( user_id TEXT ,"+
+                " material_id INTEGER , num INTEGER , PRIMARY KEY(user_id,material_id);");
+
+        db.execSQL("CREATE TABLE MATERIAL (material_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                " material_name TEXT, material_type TEXT, remain_num INTEGER, price INTEGER, DATE INTEGER);");
+
+        db.execSQL("CREATE TABLE RECIPE (food_id INTEGER,"+
+                " material_id INTEGER ,PRIMARY KEY(food_id,material_id);");
+
+        db.execSQL("CREATE TABLE HASH (food_id INTEGER,"+
+                " tag TEXT, PRIMARY KEY(food_id,tag);");
+
+
     }
 
     @Override
@@ -78,7 +87,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         int last = -1;
-        Cursor cursor = db.rawQuery("SELECT _key FROM FOOD ", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM FOOD ", null);
         while(cursor.moveToNext()){
             last++;
         }
@@ -87,48 +96,70 @@ public class DBHelper extends SQLiteOpenHelper {
         return random_int ;
     }
 
-    public void food_insert(String name,int type,String material, String tag) {
+    public void food_insert(String name,String type ) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO FOOD VALUES(null, '" + name + "', '" + type + "', '" + material + "', '" + tag + "');");
+        db.execSQL("INSERT INTO FOOD VALUES(null, '" + name + "', '" + type + "');");
         db.close();
     }
 
-    public ArrayList<String> food_search_by_ref(String select_input){
-        ArrayList<String> ret = new ArrayList<String>();
+    public void recipe_insert(int food_id , String material_id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO RECIPE VALUES('" + food_id + "', '" + material_id + "');");
+        db.close();
+    }
+
+    public void hash_insert(int food_id, String tag){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO RECIPE VALUES('" + food_id + "', '" + tag + "');");
+        db.close();
+    }
+
+    public ArrayList<Integer> food_search_by_ref(String select_input){
+        ArrayList<Integer> ret = new ArrayList<Integer>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT name,material FROM FOOD ", null);
-
+        Cursor cursor = db.rawQuery("SELECT * FROM MATERIAL ", null);
+        int material_id = -1;
         while(cursor.moveToNext()){
-            StringTokenizer st = new StringTokenizer(cursor.getString(1),"@");
-            while(st.hasMoreTokens()){
-                if(st.nextToken().equals(select_input))
-                    ret.add(cursor.getString(0));
+            if(cursor.getString(1).equals(select_input)) {
+                material_id = cursor.getInt(0);
+                break;
             }
         }
+        if(material_id == -1)
+            return ret;
+
+        Cursor cursor2 = db.rawQuery("SELECT * FROM RECIPE ", null);
+        while(cursor2.moveToNext()){
+            if(cursor2.getInt(1) == material_id ) {
+                ret.add(cursor2.getInt(0));
+            }
+        }
+
         return ret;
     }
 
 
-    public void user_insert(String id, String pw) {
+    public void user_insert(String id, String pw, String sex) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM USER",null);
-        int num = cursor.getCount()+1;
-        db.execSQL("INSERT INTO USER VALUES(null, '" + id + "', '" + pw + "', '" + num + "');");
+        Log.i("TAG",sex);
+        db.execSQL("INSERT INTO USER VALUES('" + id + "', '" + pw + "', '" + sex + "');");
         db.close();
     }
     public int Login(String id, String pw) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM USER", null);
         while(cursor.moveToNext()){
-            if(cursor.getString(1).equals(id) && cursor.getString(2).equals(pw) ){
-                Log.d("TAG", String.valueOf(cursor.getInt(0))+"DBHelper_user");
+            if(cursor.getString(0).equals(id) && cursor.getString(1).equals(pw) ){
+                Log.i("TAG",cursor.getString(2));
                 return cursor.getInt(0);
             }
         }
 
         return -1;
     }
+
 ////////////////////////////////////////////////////////////////짱구
 
 

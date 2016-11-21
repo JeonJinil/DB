@@ -102,7 +102,8 @@
                         android:text="Male"
                         android:layout_marginLeft="80dp"
                         android:textColor="#f0f7f4"
-                        android:buttonTint="#f0f7f4"/>
+                        android:buttonTint="#f0f7f4"
+                        android:id="@+id/male"/>
 
                     <CheckBox
                         android:layout_marginLeft="10dp"
@@ -110,7 +111,8 @@
                         android:layout_height="match_parent"
                         android:text="Female"
                         android:textColor="#f0f7f4"
-                        android:buttonTint="#f0f7f4"/>
+                        android:buttonTint="#f0f7f4"
+                        android:id="@+id/female"/>
                 </LinearLayout>
                 <Button
                     android:layout_marginTop="40dp"

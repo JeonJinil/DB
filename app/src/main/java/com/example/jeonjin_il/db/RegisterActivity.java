@@ -13,6 +13,7 @@ import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import butterknife.ButterKnife;
@@ -40,19 +41,31 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
     void click_Next(View view){
         EditText et_id = (EditText)findViewById(R.id.et_username);
         EditText et_pw = (EditText)findViewById(R.id.et_password);
 
+        CheckBox male = (CheckBox)findViewById(R.id.male);
+        CheckBox female = (CheckBox)findViewById(R.id.female);
+
 
         String id = et_id.getText().toString();
         String pw = et_pw.getText().toString();
+        String sex;
+
+        if(male.isChecked())
+            sex = "m";
+        else
+            sex = "f";
+
         DBHelper dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
-        dbHelper.user_insert(id,pw);
+        dbHelper.user_insert(id,pw,sex);
 
         Intent intent = new Intent();
         super.finish();
     }
+
     private void ShowEnterAnimation() {
         Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.fabtransition);
         getWindow().setSharedElementEnterTransition(transition);

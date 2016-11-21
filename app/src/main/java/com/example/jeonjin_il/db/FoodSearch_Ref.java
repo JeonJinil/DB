@@ -62,10 +62,18 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
         plus_button.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-                dbHelper.food_insert("김밥",1,"@김@밥@햄@단무지","#한식#간단");
-                dbHelper.food_insert("소고기국밥",1,"@소고기@밥","#한식");
-                dbHelper.food_insert("돈가스",2,"@돼지고기@단무지","#양식#인기");
-                dbHelper.food_insert("돈부리",2,"@돼지고기@밥","#양식");
+                dbHelper.food_insert("김밥","한식");
+                dbHelper.recipe_insert(0,"김"); dbHelper.recipe_insert(0,"밥"); dbHelper.recipe_insert(0,"햄");
+                dbHelper.hash_insert(0,"한식");  dbHelper.hash_insert(0,"비오는날");
+
+                dbHelper.food_insert("돈부리","일식");
+                dbHelper.recipe_insert(1,"돼지고기"); dbHelper.recipe_insert(1,"밥");  dbHelper.recipe_insert(1,"튀김");
+                dbHelper.hash_insert(1,"일식");  dbHelper.hash_insert(1,"비오는날");
+
+                dbHelper.food_insert("돈가스","일식");
+                dbHelper.recipe_insert(2,"돼지고기"); dbHelper.recipe_insert(2,"튀김");  dbHelper.recipe_insert(2,"야채");
+                dbHelper.hash_insert(2,"일식");  dbHelper.hash_insert(0,"비오는날");
+
             }
         });
 
@@ -79,9 +87,8 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
         int num = 0;
         for(Button tempbutton : mbutton){
             if(tempbutton == newbutton){
-                ArrayList<String> food_name = dbHelper.food_search_by_ref(data[num]);
-                Toast.makeText(getApplicationContext(),data[num] +"으로 만들수 있는 요리는 :"+food_name ,Toast.LENGTH_LONG).show();
-
+                ArrayList<Integer> food_id = dbHelper.food_search_by_ref(data[num]); //food_id 를 가저온다.
+                Toast.makeText(getApplicationContext(),data[num] +"으로 만들수 있는 요리 번호는 :"+food_id ,Toast.LENGTH_LONG).show();
             }
             num++;
         }

@@ -60,7 +60,7 @@ public class FoodSearch_Random extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                int random_value = dbHelper.food_random();
+                int random_value = dbHelper.food_random(); //FOOD 테이블의 food_id 를 랜덤으로 가저옴
                 random_textview = (TextView)findViewById(R.id.random_text);
                 random_textview.setText(random_value + " 번 요리");
             }
