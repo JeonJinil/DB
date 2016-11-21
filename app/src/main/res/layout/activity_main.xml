@@ -5,9 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg"
+    android:background="@drawable/cookie"
     tools:context="com.example.jeonjin_il.db.MainActivity"
    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:layout_marginTop="40dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="혼밥남녀"
+            android:textColor="#FF4081"
+            android:textSize="50dp"
+            android:gravity="center"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

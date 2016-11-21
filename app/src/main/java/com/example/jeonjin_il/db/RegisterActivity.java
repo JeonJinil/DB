@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         String id = et_id.getText().toString();
         String pw = et_pw.getText().toString();
-        DBHelper dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
+        DBHelper dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
         dbHelper.user_insert(id,pw);
 
         Intent intent = new Intent();

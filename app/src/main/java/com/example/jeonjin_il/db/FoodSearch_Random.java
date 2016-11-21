@@ -54,7 +54,7 @@ public class FoodSearch_Random extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodsearch_random);
 
-        dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
+        dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
         random_button = (Button) findViewById(R.id.random_button);
         random_button.setOnClickListener(new Button.OnClickListener(){
 

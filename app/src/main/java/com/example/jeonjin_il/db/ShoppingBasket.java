@@ -71,7 +71,7 @@ public class ShoppingBasket extends AppCompatActivity {
     }
     private void displayListView()
     {
-        dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
+        dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
 
         ArrayList<ShoppingItem> ShoppingList=new ArrayList<ShoppingItem>();
         ShoppingItem item;
@@ -176,7 +176,7 @@ public class ShoppingBasket extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String temp="";
-                DBHelper db=new DBHelper(getApplicationContext(),"FOOD.db",null,1);
+                DBHelper db=new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
 
                 StringBuffer responseText = new StringBuffer();
                 responseText.append("The following were selected...\n");

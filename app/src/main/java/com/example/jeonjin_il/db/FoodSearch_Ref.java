@@ -90,7 +90,7 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
 
     private void inti() {
 
-        dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
+        dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
         mbutton[0] = (Button) findViewById(R.id.ref_button11);
         mbutton[1] = (Button) findViewById(R.id.ref_button12);
         mbutton[2] = (Button) findViewById(R.id.ref_button13);

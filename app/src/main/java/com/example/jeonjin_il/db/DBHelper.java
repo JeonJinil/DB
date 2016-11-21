@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 " name TEXT, type INTEGER, material TEXT, tag TEXT);");
 
         db.execSQL("CREATE TABLE USER (_key INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "id TEXT,pw TEXT, num INTEGER);");
+                "id TEXT,pw TEXT, sex TEXT);");
 
         db.execSQL("CREATE TABLE BASKET (_key INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 " basket_id TEXT, material TEXT);");

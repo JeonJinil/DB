@@ -52,7 +52,7 @@ public class MainLogin extends AppCompatActivity {
     }
 
     void click_Go(View view){
-        DBHelper dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
+        DBHelper dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
         String id = etUsername.getText().toString();
         String pw = etPassword.getText().toString();
 

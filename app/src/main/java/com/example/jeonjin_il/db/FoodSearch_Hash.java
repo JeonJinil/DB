@@ -27,7 +27,7 @@ public class FoodSearch_Hash extends AppCompatActivity {
         hash_text = (EditText) findViewById(R.id.hash_text);
         textview = (TextView) findViewById(R.id.hash_text2);
 
-        dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
+        dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
         hash_button.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
