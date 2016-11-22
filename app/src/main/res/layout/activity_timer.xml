@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <com.example.jeonjin_il.db.CircleTimerView
+        android:id="@+id/ctv"
+        android:layout_width="wrap_content"
+        android:layout_height="316dp"
+        android:layout_centerInParent="true"
+        android:layout_weight="1.04">
+    </com.example.jeonjin_il.db.CircleTimerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="start"
+            android:text="START TIMER"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pause"
+            android:text="PAUSE TIMER"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="STOP TIMER"
+            android:onClick="stop"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:onClick="setTime"
+            android:text="Set Time"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/time_set_et_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint=" 분 "
+            android:inputType="number"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/time_set_et_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint=" 초 "
+            android:inputType="number"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+</LinearLayout>
