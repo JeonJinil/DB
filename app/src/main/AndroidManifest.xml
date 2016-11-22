@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="혼밥남녀"
+
         android:supportsRtl="true"
         android:theme="@style/Transpa">
         <activity android:name=".MainActivity"

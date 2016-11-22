@@ -3,6 +3,7 @@ package com.example.jeonjin_il.db;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,9 +13,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.ss.bottomnavigation.BottomNavigation;
+import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
+
 public class MainActivity extends AppCompatActivity {
 
     Button go_ref , go_ran , go_hash , go_basket ,go_list;
+    private FragmentTransaction transaction;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -52,6 +57,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        BottomNavigation bottomNavigation=(BottomNavigation)findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
+            @Override
+            public void onSelectedItemChanged(int itemId) {
+                switch (itemId){
+                    case R.id.tab_home:
+                        transaction=getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_fragment_containers,new FragmentA());
+                        break;
+                    case R.id.tab_images:
+                        transaction=getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_fragment_containers,new FragmentB());
+                        break;
+                    case R.id.tab_camera:
+                        transaction=getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_fragment_containers,new FragmentC());
+                        break;
+                    case R.id.tab_products:
+                        transaction=getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_fragment_containers,new FragmentD());
+                        break;
+                    case R.id.tab_more:
+                        transaction=getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_fragment_containers,new FragmentE());
+                        break;
+                }
+                transaction.commit();
+            }
+        });
 //
 //        go_ref = (Button) findViewById(R.id.main_button_ref);
 //        go_ran = (Button)findViewById(R.id.main_button_random);

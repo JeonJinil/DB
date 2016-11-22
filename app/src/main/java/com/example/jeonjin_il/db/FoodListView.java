@@ -30,7 +30,7 @@ public class FoodListView extends AppCompatActivity {
         datas.add(new FoodListItem(R.drawable.food_02,"라면"));
         datas.add(new FoodListItem(R.drawable.food_03,"꼬치구이"));
 
-        listview = (ListView)findViewById(R.id.listview1);
+        listview = (ListView)findViewById(R.id.listvie);
 
         ListViewAdapter list_adapter = new ListViewAdapter(getLayoutInflater(),datas);
         listview.setAdapter(list_adapter);
