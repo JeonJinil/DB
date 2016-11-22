@@ -10,11 +10,6 @@
         android:theme="@style/Transpa">
         <activity android:name=".MainActivity"
             android:theme="@style/Transpa">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
         <activity android:name=".FoodSearch_Ref"/>
         <activity android:name=".MainAdmin" />
@@ -22,6 +17,7 @@
         <activity android:name=".FoodListView"/>
         <activity android:name=".FoodSearch_Hash"/>
         <activity android:name=".FoodSearch_Random"/>
+        <activity android:name=".TimerView"/>
         <activity android:name=".MainLogin"
             android:theme="@style/Translucent"/>
         <activity android:name=".ShoppingBasket"/>
