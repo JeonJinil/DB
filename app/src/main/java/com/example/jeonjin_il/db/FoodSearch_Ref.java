@@ -63,20 +63,45 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View v) {
                 dbHelper.food_insert("김밥","한식");
-                dbHelper.recipe_insert(0,"김"); dbHelper.recipe_insert(0,"밥"); dbHelper.recipe_insert(0,"햄");
+                dbHelper.recipe_insert(0,0); dbHelper.recipe_insert(0,1); dbHelper.recipe_insert(0,2);
                 dbHelper.hash_insert(0,"한식");  dbHelper.hash_insert(0,"비오는날");
 
                 dbHelper.food_insert("돈부리","일식");
-                dbHelper.recipe_insert(1,"돼지고기"); dbHelper.recipe_insert(1,"밥");  dbHelper.recipe_insert(1,"튀김");
+                dbHelper.recipe_insert(1,3); dbHelper.recipe_insert(1,1);  dbHelper.recipe_insert(1,4);
                 dbHelper.hash_insert(1,"일식");  dbHelper.hash_insert(1,"비오는날");
 
                 dbHelper.food_insert("돈가스","일식");
-                dbHelper.recipe_insert(2,"돼지고기"); dbHelper.recipe_insert(2,"튀김");  dbHelper.recipe_insert(2,"야채");
-                dbHelper.hash_insert(2,"일식");  dbHelper.hash_insert(0,"비오는날");
+                dbHelper.recipe_insert(2,3); dbHelper.recipe_insert(2,4);  dbHelper.recipe_insert(2,5);
+                dbHelper.hash_insert(2,"일식");  dbHelper.hash_insert(2,"비오는날");
 
+                dbHelper.material_insert("김","??",10,1000,2016);
+                dbHelper.material_insert("밥","??",10,1000,2016);
+                dbHelper.material_insert("햄","??",10,1000,2016);
+                dbHelper.material_insert("돼지고기","??",10,1000,2016);
+                dbHelper.material_insert("튀김","??",10,1000,2016);
+                dbHelper.material_insert("채소","??",10,1000,2016);
+
+                Toast.makeText(getApplicationContext(),"테스트용 자료 넣었음 ",Toast.LENGTH_LONG).show();
             }
         });
 
+        Button random = (Button)findViewById(R.id.ref_button_random);
+        random.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),FoodSearch_Random.class);
+                startActivity(intent);
+            }
+        });
+
+        Button hash = (Button)findViewById(R.id.ref_button_hash);
+        hash.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),FoodSearch_Hash.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -88,7 +113,7 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
         for(Button tempbutton : mbutton){
             if(tempbutton == newbutton){
                 ArrayList<Integer> food_id = dbHelper.food_search_by_ref(data[num]); //food_id 를 가저온다.
-                Toast.makeText(getApplicationContext(),data[num] +"으로 만들수 있는 요리 번호는 :"+food_id ,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),data[num] +"으로 만들수 있는 요리 번호는 :"+food_id.toString() ,Toast.LENGTH_LONG).show();
             }
             num++;
         }

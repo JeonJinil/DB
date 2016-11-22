@@ -27,16 +27,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 " food_name TEXT, food_type INTEGER );");
 
         db.execSQL("CREATE TABLE BASKET ( user_id TEXT ,"+
-                " material_id INTEGER , num INTEGER , PRIMARY KEY(user_id,material_id);");
+                " material_id INTEGER , num INTEGER );");
 
         db.execSQL("CREATE TABLE MATERIAL (material_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 " material_name TEXT, material_type TEXT, remain_num INTEGER, price INTEGER, DATE INTEGER);");
 
         db.execSQL("CREATE TABLE RECIPE (food_id INTEGER,"+
-                " material_id INTEGER ,PRIMARY KEY(food_id,material_id);");
+                " material_id INTEGER );");
 
         db.execSQL("CREATE TABLE HASH (food_id INTEGER,"+
-                " tag TEXT, PRIMARY KEY(food_id,tag);");
+                " tag TEXT);");
 
 
     }
@@ -48,49 +48,40 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<Integer> food_hash(String str){
         ArrayList<Integer> ret = new ArrayList<Integer>();
-        ArrayList<String> temp = new ArrayList<String>();
+
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT tag FROM FOOD ", null);
-
         StringTokenizer st = new StringTokenizer(str,"#");
-        while(st.hasMoreTokens())
-                temp.add(st.nextToken());
-
-        for(int i=0;i<temp.size();i++){
-            Log.d("TAG","temp "+temp.get(i));
-        }
-
-        int num = 0;
-        while(cursor.moveToNext()){
-            StringTokenizer st2 = new StringTokenizer(cursor.getString(0),"#");
-            while(st2.hasMoreTokens()){
-                boolean flag= false;
-                String now_str = st2.nextToken();
-                for(int i=0;i<temp.size();i++){
-                    if(now_str.equals(temp.get(i))) {
-                        ret.add(num);
-                        flag = true;
+        while(st.hasMoreTokens()){
+            String data = st.nextToken();
+            Log.d("TAG","data : "+data);
+            Cursor cursor = db.rawQuery("SELECT * FROM HASH WHERE tag = '"+data+"' ", null);
+            while(cursor.moveToNext()){
+                Log.d("TAG","cursor in");
+                boolean ok = true;
+                for(int i=0;i<ret.size();i++){
+                    if(ret.get(i) == cursor.getInt(0)){
+                        ok = false;
                         break;
                     }
                 }
-                if(flag)
-                    break;
+                if(ok)
+                    ret.add(cursor.getInt(0));
             }
-            num++;
         }
-        return ret;
 
+        return ret;
     }
 
     public int food_random(){
         SQLiteDatabase db = getReadableDatabase();
 
-        int last = -1;
+        int last = 0;
         Cursor cursor = db.rawQuery("SELECT * FROM FOOD ", null);
         while(cursor.moveToNext()){
             last++;
         }
+        Log.d("TAG", String.valueOf(last));
         double random_double = Math.random();
         int random_int = (int)(random_double * last);
         return random_int ;
@@ -102,15 +93,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void recipe_insert(int food_id , String material_id){
+    public void material_insert(String name , String type , int num , int price , int date){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO RECIPE VALUES('" + food_id + "', '" + material_id + "');");
+        db.execSQL("INSERT INTO MATERIAL VALUES(null, '" + name + "', '" + type + "'," + num +","+price +","+date+");");
+        db.close();
+    }
+
+    public void recipe_insert(int food_id , int material_id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO RECIPE VALUES(" + food_id + ", " + material_id + ");");
         db.close();
     }
 
     public void hash_insert(int food_id, String tag){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO RECIPE VALUES('" + food_id + "', '" + tag + "');");
+        db.execSQL("INSERT INTO HASH VALUES(" + food_id + ", '" + tag + "');");
         db.close();
     }
 
@@ -118,22 +115,10 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<Integer> ret = new ArrayList<Integer>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM MATERIAL ", null);
-        int material_id = -1;
+        Cursor cursor = db.rawQuery("SELECT R.food_id FROM MATERIAL AS M, RECIPE AS R " +
+                "WHERE R.material_id = M.material_id AND M.material_name = '"+select_input+"'", null);
         while(cursor.moveToNext()){
-            if(cursor.getString(1).equals(select_input)) {
-                material_id = cursor.getInt(0);
-                break;
-            }
-        }
-        if(material_id == -1)
-            return ret;
-
-        Cursor cursor2 = db.rawQuery("SELECT * FROM RECIPE ", null);
-        while(cursor2.moveToNext()){
-            if(cursor2.getInt(1) == material_id ) {
-                ret.add(cursor2.getInt(0));
-            }
+            ret.add(cursor.getInt(0));
         }
 
         return ret;
@@ -147,6 +132,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO USER VALUES('" + id + "', '" + pw + "', '" + sex + "');");
         db.close();
     }
+
     public int Login(String id, String pw) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM USER", null);

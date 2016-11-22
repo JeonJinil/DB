@@ -117,6 +117,20 @@
                 android:id="@+id/ref_button_plus"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true" />
+
+            <Button
+                android:text="랜덤 테스트 "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ref_button_random"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="해시 테스트"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ref_button_hash"
+                android:layout_weight="0.20" />
         </LinearLayout>
 
     </LinearLayout>
