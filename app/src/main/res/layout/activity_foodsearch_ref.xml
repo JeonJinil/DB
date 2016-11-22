@@ -116,21 +116,28 @@
                 android:text="아이템 추가"
                 android:id="@+id/ref_button_plus"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_weight="1"/>
 
             <Button
-                android:text="랜덤 테스트 "
+                android:text="랜덤  "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ref_button_random"
                 android:layout_weight="1" />
 
             <Button
-                android:text="해시 테스트"
+                android:text="해시 "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ref_button_hash"
-                android:layout_weight="0.20" />
+                android:layout_weight="1" />
+            <Button
+                android:text="타이머 "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ref_button_time"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>

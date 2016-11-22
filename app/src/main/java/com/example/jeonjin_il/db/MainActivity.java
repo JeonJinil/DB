@@ -1,17 +1,13 @@
 package com.example.jeonjin_il.db;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.ss.bottomnavigation.BottomNavigation;
 import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
@@ -65,23 +61,23 @@ public class MainActivity extends AppCompatActivity {
                 switch (itemId){
                     case R.id.tab_home:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new FragmentA());
+                        transaction.replace(R.id.frame_fragment_containers,new chinaFragment());
                         break;
                     case R.id.tab_images:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new FragmentB());
+                        transaction.replace(R.id.frame_fragment_containers,new koreaFragment());
                         break;
                     case R.id.tab_camera:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new FragmentC());
+                        transaction.replace(R.id.frame_fragment_containers,new mainFragment());
                         break;
                     case R.id.tab_products:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new FragmentD());
+                        transaction.replace(R.id.frame_fragment_containers,new westernFragment());
                         break;
                     case R.id.tab_more:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new FragmentE());
+                        transaction.replace(R.id.frame_fragment_containers,new japanFragment());
                         break;
                 }
                 transaction.commit();

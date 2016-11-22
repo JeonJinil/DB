@@ -12,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,11 +19,11 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentA extends Fragment  {
+public class westernFragment extends Fragment  {
     ListView listview ;
     ArrayList<FoodListItem> datas = new ArrayList<FoodListItem>();
 
-    public FragmentA() {
+    public westernFragment() {
         // Required empty public constructor
     }
 
@@ -32,9 +31,9 @@ public class FragmentA extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        inflater.inflate(R.layout.fragment_a, container, false);
+        inflater.inflate(R.layout.fragment_western, container, false);
         // Inflate the layout for this fragment
-        LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_a, container, false);
+        LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_western, container, false);
 
         datas.add(new FoodListItem(R.drawable.food_01,"볶음밥"));
         datas.add(new FoodListItem(R.drawable.food_02,"라면"));
@@ -69,7 +68,7 @@ public class FragmentA extends Fragment  {
 
         @Override
         public Object getItem(int position) {
-            // TODO Auto-generated method stub
+            // TODO Auto-generated method stub2
             return datas.get(position);//datas의 특정 인덱스 위치 객체 리턴.
         }
 
@@ -107,4 +106,4 @@ public class FragmentA extends Fragment  {
 
 
     }
-    }
+}

@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:id="@+id/frame_fragment_containers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true" />
     <com.ss.bottomnavigation.BottomNavigation
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -16,7 +21,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:tab_text="Home"
             app:tab_icon="@drawable/china"
             />
         <com.ss.bottomnavigation.TabItem
@@ -24,7 +28,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:tab_text="Images"
             app:tab_icon="@drawable/korea"
             />
         <com.ss.bottomnavigation.TabItem
@@ -33,7 +36,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:tab_text="Camera"
             app:tab_icon="@drawable/main"
             />
         <com.ss.bottomnavigation.TabItem
@@ -41,22 +43,15 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:tab_text="Products"
             app:tab_icon="@drawable/western"
             />
         <com.ss.bottomnavigation.TabItem
             android:id="@+id/tab_more"
             android:layout_width="0dp"
-
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:tab_text="More"
             app:tab_icon="@drawable/sushi"
             />
     </com.ss.bottomnavigation.BottomNavigation>
-    <FrameLayout
-        android:id="@+id/frame_fragment_containers"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"/>
+
 </RelativeLayout>
