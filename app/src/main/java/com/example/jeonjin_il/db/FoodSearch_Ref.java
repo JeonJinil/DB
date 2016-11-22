@@ -103,6 +103,15 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+        Button timer = (Button)findViewById(R.id.ref_button_time);
+        timer.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),TimerView.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
