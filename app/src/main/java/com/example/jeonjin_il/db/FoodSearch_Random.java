@@ -18,36 +18,7 @@ public class FoodSearch_Random extends AppCompatActivity {
     DBHelper dbHelper;
     Button random_button ;
     TextView random_textview ;
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.action_search :
-                return true;
-            case R.id.action_fridge:
-                Intent intent = new Intent(getApplication(),FoodSearch_Ref.class);
-                startActivity(intent);
-                return true;
-            case R.id.action_login :
-                Intent intent_login = new Intent(this,MainLogin.class);
-                startActivity(intent_login);
-                return true;
-            case R.id.action_cart:
-                Intent intent_cart=  new Intent(this,ShoppingBasket.class);
-                startActivity(intent_cart);
-                return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,8 +2,11 @@ package com.example.jeonjin_il.db;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,6 +14,8 @@ import android.widget.Button;
 
 import com.ss.bottomnavigation.BottomNavigation;
 import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
+
+import static android.R.attr.fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     switch(item.getItemId()){
         case R.id.action_search :
+            Intent intent_hash = new Intent(getApplication(),FoodSearch_Hash.class);
+            startActivity(intent_hash);
             return true;
         case R.id.action_fridge:
-            Intent intent = new Intent(getApplication(),FoodSearch_Ref.class);
-            startActivity(intent);
+            Intent intent_ref = new Intent(getApplication(),FoodSearch_Ref.class);
+            startActivity(intent_ref);
             return true;
         case R.id.action_login :
             Intent intent_login = new Intent(this,MainLogin.class);
@@ -55,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigation bottomNavigation=(BottomNavigation)findViewById(R.id.bottom_navigation);
+        bottomNavigation.setDefaultItem((byte)2);
+
         bottomNavigation.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
             @Override
             public void onSelectedItemChanged(int itemId) {
@@ -67,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction=getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new koreaFragment());
                         break;
-                    case R.id.tab_camera:
+                    case R.id.tab_main:
                         transaction=getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_fragment_containers,new mainFragment());
                         break;
@@ -83,65 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 transaction.commit();
             }
         });
-//
-//        go_ref = (Button) findViewById(R.id.main_button_ref);
-//        go_ran = (Button)findViewById(R.id.main_button_random);
-//        go_hash = (Button) findViewById(R.id.main_button_hash);
-//        go_basket = (Button) findViewById(R.id.main_button_basket);
-//        go_list = (Button) findViewById(R.id.main_button_list);
-//
-//        go_ref.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplication(),FoodSearch_Ref.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        go_ran.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplication(),FoodSearch_Random.class);
-//                startActivity(intent);
-//            }
-//        });
-//        go_hash.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplication(),FoodSearch_Hash.class);
-//                startActivity(intent);
-//            }
-//        });
-//        go_basket.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplication(),ShoppingBasket.class);
-//                startActivity(intent);
-//            }
-//        });
-//        go_list.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent  = new Intent(getApplication(),FoodListView.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//
-//
-//        Button temp  = (Button) findViewById(R.id.main_button_insert);
-//        temp.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                DBHelper dbHelper;
-//                dbHelper = new DBHelper(getApplicationContext(),"FOOD.db",null,1);
-//                dbHelper.basket_insert("user01","@김@밥@김@햄@단무지");
-//            }
-//        });
-
-
+    }
 
 
     }
-}
+

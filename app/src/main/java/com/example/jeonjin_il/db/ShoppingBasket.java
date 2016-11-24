@@ -33,10 +33,12 @@ public class ShoppingBasket extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_search :
+                Intent intent_hash = new Intent(getApplication(),FoodSearch_Hash.class);
+                startActivity(intent_hash);
                 return true;
             case R.id.action_fridge:
-                Intent intent = new Intent(getApplication(),FoodSearch_Ref.class);
-                startActivity(intent);
+                Intent intent_ref = new Intent(getApplication(),FoodSearch_Ref.class);
+                startActivity(intent_ref);
                 return true;
             case R.id.action_login :
                 Intent intent_login = new Intent(this,MainLogin.class);

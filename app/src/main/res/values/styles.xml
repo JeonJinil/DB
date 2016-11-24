@@ -5,7 +5,7 @@
     <!-- Customize your theme here. -->
 
     <item name="colorPrimary">@android:color/transparent</item>
-    <item name="colorPrimaryDark">#0288D1</item>
+    <item name="colorPrimaryDark">#D2691E</item>
     <item name="colorAccent">#2fa881</item>
     <!-- set Can use Activity transitions -->
     <item name="android:windowContentTransitions">true</item>

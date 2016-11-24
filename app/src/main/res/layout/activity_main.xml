@@ -8,13 +8,14 @@
         android:id="@+id/frame_fragment_containers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/mbg"/>
     <com.ss.bottomnavigation.BottomNavigation
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent">
+        android:background="#88FFFFFF">
         <com.ss.bottomnavigation.TabItem
             android:id="@+id/tab_home"
             android:background="@android:color/transparent"
@@ -31,7 +32,7 @@
             app:tab_icon="@drawable/korea"
             />
         <com.ss.bottomnavigation.TabItem
-            android:id="@+id/tab_camera"
+            android:id="@+id/tab_main"
 
             android:layout_width="0dp"
             android:layout_height="match_parent"
