@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -35,9 +38,9 @@ public class koreaFragment extends Fragment  {
         // Inflate the layout for this fragment
         LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_korea, container, false);
 
-        datas.add(new FoodListItem(R.drawable.food_01,"볶음밥"));
-        datas.add(new FoodListItem(R.drawable.food_02,"라면"));
-        datas.add(new FoodListItem(R.drawable.food_03,"꼬치구이"));
+        datas.add(new FoodListItem(R.drawable.kfood_1,"봉골레 파스타 ",readTxt(R.raw.kfood_1)));
+        datas.add(new FoodListItem(R.drawable.kfood_2,"???",readTxt(R.raw.kfood_2)));
+
 
         listview = (ListView)ll.findViewById(R.id.listvie);
         ListViewAdapter list_adapter = new ListViewAdapter(getActivity().getLayoutInflater(),datas);
@@ -98,12 +101,33 @@ public class koreaFragment extends Fragment  {
                     Intent intent = new Intent(getActivity(), FoodDetail.class);
                     intent.putExtra("Food_name", datas.get(position).getFood_name());
                     intent.putExtra("Food_icon", datas.get(position).getIconDrawable());
+                    intent.putExtra("Food_how", datas.get(position).getHow());
                     startActivity(intent);
                 }
             });
             return convertView;
         }
+    }
 
+    private String readTxt(int text){
 
+        InputStream inputStream = getResources().openRawResource(text);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        int i;
+        try {
+            i = inputStream.read();
+            while (i != -1)
+            {
+                byteArrayOutputStream.write(i);
+                i = inputStream.read();
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return byteArrayOutputStream.toString();
     }
 }

@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/fooddetail_layout">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ref_1"
-        android:layout_alignParentTop="true"
-        android:id="@+id/fooddetail_image"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:text="TextView"
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/fooddetail_text" />
-</RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:text="TextView"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/fooddetail_name"
+                android:background="#FFFFFF"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize ="20dp"
+                android:textColor="#000000"
+                android:id="@+id/fooddetail_how"
+                android:background="#FFFFFF"/>
+            <Button
+                android:text="요리재료 사기"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fooddetail_buy"/>
+        </LinearLayout>
+
+
+</ScrollView>

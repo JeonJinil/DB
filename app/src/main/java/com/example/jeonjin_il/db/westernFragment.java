@@ -4,7 +4,6 @@ package com.example.jeonjin_il.db;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -35,14 +37,14 @@ public class westernFragment extends Fragment  {
         // Inflate the layout for this fragment
         LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_western, container, false);
 
-        datas.add(new FoodListItem(R.drawable.food_01,"볶음밥"));
-        datas.add(new FoodListItem(R.drawable.food_02,"라면"));
-        datas.add(new FoodListItem(R.drawable.food_03,"꼬치구이"));
+
+        datas.add(new FoodListItem(R.drawable.wfood_1,"너무 맜있어 제육볶음",readTxt(R.raw.wfood_1)));
+        datas.add(new FoodListItem(R.drawable.wfood_2,"베이컨 감자 찜",readTxt(R.raw.wfood_2)));
 
         listview = (ListView)ll.findViewById(R.id.listvie);
         ListViewAdapter list_adapter = new ListViewAdapter(getActivity().getLayoutInflater(),datas);
         listview.setAdapter(list_adapter);
-        Log.d("TAG","finish");
+
         return ll;
 
     }
@@ -89,7 +91,6 @@ public class westernFragment extends Fragment  {
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.activity_fooditem, null);
             }
-            Log.d("TAG", datas.get(position).getFood_name());
             ImageButton img_flag = (ImageButton) convertView.findViewById(R.id.fooditme_button);
             img_flag.setImageResource(datas.get(position).getIconDrawable());
             img_flag.setOnClickListener(new ImageButton.OnClickListener() {
@@ -98,6 +99,7 @@ public class westernFragment extends Fragment  {
                     Intent intent = new Intent(getActivity(), FoodDetail.class);
                     intent.putExtra("Food_name", datas.get(position).getFood_name());
                     intent.putExtra("Food_icon", datas.get(position).getIconDrawable());
+                    intent.putExtra("Food_how", datas.get(position).getHow());
                     startActivity(intent);
                 }
             });
@@ -106,4 +108,27 @@ public class westernFragment extends Fragment  {
 
 
     }
+    private String readTxt(int text){
+
+        InputStream inputStream = getResources().openRawResource(text);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        int i;
+        try {
+            i = inputStream.read();
+            while (i != -1)
+            {
+                byteArrayOutputStream.write(i);
+                i = inputStream.read();
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return byteArrayOutputStream.toString();
+    }
 }
+
+

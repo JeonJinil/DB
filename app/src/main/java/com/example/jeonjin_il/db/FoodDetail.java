@@ -3,16 +3,20 @@ package com.example.jeonjin_il.db;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by jeonjin-il on 2016. 11. 18..
  */
 
 public class FoodDetail extends AppCompatActivity {
-    TextView textview ;
-    ImageView imageView;
+    TextView text_foodname , text_foodhow ;
+    ScrollView sc;
+    Button buy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,14 +25,21 @@ public class FoodDetail extends AppCompatActivity {
         Intent intent = getIntent();
         int food_icon = intent.getExtras().getInt("Food_icon");
         String food_name = intent.getExtras().getString("Food_name");
+        String food_how = intent.getExtras().getString("Food_how");
 
-        textview = (TextView) findViewById(R.id.fooddetail_text);
-        imageView = (ImageView) findViewById(R.id.fooddetail_image);
+        sc = (ScrollView) findViewById(R.id.fooddetail_layout);
+        text_foodname = (TextView) findViewById(R.id.fooddetail_name);
+        text_foodhow = (TextView) findViewById(R.id.fooddetail_how);
+        buy = (Button) findViewById(R.id.fooddetail_buy);
 
-
-        imageView.setImageResource(food_icon);
-        textview.setText(food_name);
-
-
+        sc.setBackgroundResource(food_icon);
+        text_foodname.setText(food_name);
+        text_foodhow.setText(food_how);
+        buy.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"아직 구현안했지롱 ",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

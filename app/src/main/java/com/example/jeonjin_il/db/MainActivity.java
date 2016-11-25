@@ -2,11 +2,8 @@ package com.example.jeonjin_il.db;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,8 +11,6 @@ import android.widget.Button;
 
 import com.ss.bottomnavigation.BottomNavigation;
 import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
-
-import static android.R.attr.fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.tab_more:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new japanFragment());
+                        transaction.replace(R.id.frame_fragment_containers,new SnackFragment());
                         break;
                 }
                 transaction.commit();

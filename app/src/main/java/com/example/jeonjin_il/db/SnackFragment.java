@@ -13,17 +13,20 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class japanFragment extends Fragment  {
+public class SnackFragment extends Fragment  {
     ListView listview ;
     ArrayList<FoodListItem> datas = new ArrayList<FoodListItem>();
 
-    public japanFragment() {
+    public SnackFragment() {
         // Required empty public constructor
     }
 
@@ -31,13 +34,12 @@ public class japanFragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        inflater.inflate(R.layout.fragment_japan, container, false);
+        inflater.inflate(R.layout.fragment_snack, container, false);
         // Inflate the layout for this fragment
-        LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_japan, container, false);
+        LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_snack, container, false);
 
-        datas.add(new FoodListItem(R.drawable.food_01,"볶음밥"));
-        datas.add(new FoodListItem(R.drawable.food_02,"라면"));
-        datas.add(new FoodListItem(R.drawable.food_03,"꼬치구이"));
+        datas.add(new FoodListItem(R.drawable.bfood_1,"치즈 라볶이",readTxt(R.raw.bfood_1)));
+        datas.add(new FoodListItem(R.drawable.bfood_2,"치즈 포테이토",readTxt(R.raw.bfood_2)));
 
         listview = (ListView)ll.findViewById(R.id.listvie);
         ListViewAdapter list_adapter = new ListViewAdapter(getActivity().getLayoutInflater(),datas);
@@ -98,6 +100,7 @@ public class japanFragment extends Fragment  {
                     Intent intent = new Intent(getActivity(), FoodDetail.class);
                     intent.putExtra("Food_name", datas.get(position).getFood_name());
                     intent.putExtra("Food_icon", datas.get(position).getIconDrawable());
+                    intent.putExtra("Food_how", datas.get(position).getHow());
                     startActivity(intent);
                 }
             });
@@ -105,5 +108,26 @@ public class japanFragment extends Fragment  {
         }
 
 
+    }
+    private String readTxt(int text){
+
+        InputStream inputStream = getResources().openRawResource(text);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        int i;
+        try {
+            i = inputStream.read();
+            while (i != -1)
+            {
+                byteArrayOutputStream.write(i);
+                i = inputStream.read();
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return byteArrayOutputStream.toString();
     }
 }
