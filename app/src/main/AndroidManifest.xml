@@ -20,6 +20,7 @@
             android:theme="@style/Translucent"/>
         <activity android:name=".ShoppingBasket"/>
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".FoodSearch_Ref_activity"/>
         <activity android:name=".FoodDetail"/>
         <activity android:name=".SplashActivity">
             <intent-filter>

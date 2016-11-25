@@ -1,11 +1,13 @@
 package com.example.jeonjin_il.db;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,9 +36,13 @@ public class FoodSearch_Hash extends AppCompatActivity {
                 String str = hash_text.getText().toString();
                 ArrayList<Integer> datas = new ArrayList<Integer>();
                 datas = dbHelper.food_hash(str);
-
-
-                textview.setText(datas.toString());
+                if(datas.size() ==0)
+                    Toast.makeText(getApplicationContext(),str +"로 등록된 요리가 없습니다 " ,Toast.LENGTH_LONG).show();
+                else {
+                    Intent intent = new Intent(getApplication(),FoodSearch_Ref_activity.class);
+                    intent.putExtra("food_id",datas);
+                    startActivity(intent);
+                }
             }
         });
 

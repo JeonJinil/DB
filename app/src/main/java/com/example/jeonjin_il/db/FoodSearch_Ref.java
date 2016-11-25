@@ -3,9 +3,6 @@ package com.example.jeonjin_il.db;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,24 +29,111 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
         plus_button.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-                dbHelper.food_insert("김밥","한식");
-                dbHelper.recipe_insert(0,0); dbHelper.recipe_insert(0,1); dbHelper.recipe_insert(0,2);
-                dbHelper.hash_insert(0,"한식");  dbHelper.hash_insert(0,"비오는날");
+                //재료
+                dbHelper.material_insert("감자","야채",5,2000,"2016-12-05");      //0
+                dbHelper.material_insert("베이컨","고기",5,5500,"2016-12-05");
+                dbHelper.material_insert("체다지츠","치즈",5,4000,"2016-12-05");
+                dbHelper.material_insert("모짜렐라 치즈","치즈",5,4000,"2016-12-05");
+                dbHelper.material_insert("식용류","기름",5,2000,"2016-12-05");
+                dbHelper.material_insert("라면사리","랴면",5,1000,"2016-12-05");    //5
+                dbHelper.material_insert("가래떡","떡",5,3000,"2016-12-05");
+                dbHelper.material_insert("양파","야채",5,2000,"2016-12-05");
+                dbHelper.material_insert("고추장","장",5,6000,"2016-12-05");
+                dbHelper.material_insert("케첩","장",5,4000,"2016-12-05");
+                dbHelper.material_insert("방울토마토","야채",5,2000,"2016-12-05");     //10
+                dbHelper.material_insert("햄","고기",5,10000,"2016-12-05");
+                dbHelper.material_insert("생크림","크림",5,2000,"2016-12-05");
+                dbHelper.material_insert("브로콜리","야채",5,2000,"2016-12-05");
+                dbHelper.material_insert("달걀","고기",5,500,"2016-12-05");
+                dbHelper.material_insert("김치","야채",5,2000,"2016-12-05");        //15
+                dbHelper.material_insert("당근","야채",5,2000,"2016-12-05");
+                dbHelper.material_insert("가지","야채",5,2000,"2016-12-05");
+                dbHelper.material_insert("소금","조미료",5,1000,"2016-12-05");
+                dbHelper.material_insert("참치","고기",5,7000,"2016-12-05");
+                dbHelper.material_insert("올리고당","기름",5,5000,"2016-12-05");     //20
+                dbHelper.material_insert("돼지고기","고기",5,10000,"2016-12-05");
+                dbHelper.material_insert("간장","조미료",5,2000,"2016-12-05");
+                dbHelper.material_insert("메추리알","고기",5,2000,"2016-12-05");
+                dbHelper.material_insert("마요네즈","조미료",5,2000,"2016-12-05");
+                dbHelper.material_insert("고추","야채",5,2000,"2016-12-05");       //25
 
-                dbHelper.food_insert("돈부리","일식");
-                dbHelper.recipe_insert(1,3); dbHelper.recipe_insert(1,1);  dbHelper.recipe_insert(1,4);
-                dbHelper.hash_insert(1,"일식");  dbHelper.hash_insert(1,"비오는날");
+//음식
+                dbHelper.food_insert("라볶이","분식");
+                dbHelper.food_insert("치즈베이컨","분식");
+                dbHelper.food_insert("베이컨크림파스타","면식");
+                dbHelper.food_insert("봉골레파스타","면식");
+                dbHelper.food_insert("오믈렛","한식");
+                dbHelper.food_insert("김치볶음밥","한식");
+                dbHelper.food_insert("제육볶음","양식");
+                dbHelper.food_insert("베이컨감자찜","양식");
 
-                dbHelper.food_insert("돈가스","일식");
-                dbHelper.recipe_insert(2,3); dbHelper.recipe_insert(2,4);  dbHelper.recipe_insert(2,5);
-                dbHelper.hash_insert(2,"일식");  dbHelper.hash_insert(2,"비오는날");
+//레시피당 들가는 재료
+                dbHelper.recipe_insert(0,0);
+                dbHelper.recipe_insert(0,1);
+                dbHelper.recipe_insert(0,2);
+                dbHelper.recipe_insert(0,3);
+                dbHelper.recipe_insert(0,4);
 
-                dbHelper.material_insert("김","??",10,1000,2016);
-                dbHelper.material_insert("밥","??",10,1000,2016);
-                dbHelper.material_insert("햄","??",10,1000,2016);
-                dbHelper.material_insert("돼지고기","??",10,1000,2016);
-                dbHelper.material_insert("튀김","??",10,1000,2016);
-                dbHelper.material_insert("채소","??",10,1000,2016);
+                dbHelper.recipe_insert(1,5);
+                dbHelper.recipe_insert(1,6);
+                dbHelper.recipe_insert(1,7);
+                dbHelper.recipe_insert(1,3);
+                dbHelper.recipe_insert(1,8);
+                dbHelper.recipe_insert(1,9);
+
+                dbHelper.recipe_insert(2,7);
+                dbHelper.recipe_insert(2,10);
+                dbHelper.recipe_insert(2,11);
+                dbHelper.recipe_insert(2,12);
+                dbHelper.recipe_insert(2,18);
+
+                dbHelper.recipe_insert(3,1);
+                dbHelper.recipe_insert(3,13);
+                dbHelper.recipe_insert(3,12);
+                dbHelper.recipe_insert(3,2);
+
+                dbHelper.recipe_insert(4,1);
+                dbHelper.recipe_insert(4,14);
+                dbHelper.recipe_insert(4,15);
+                dbHelper.recipe_insert(4,7);
+                dbHelper.recipe_insert(4,16);
+                dbHelper.recipe_insert(4,17);
+                dbHelper.recipe_insert(4,18);
+
+                dbHelper.recipe_insert(5,15);
+                dbHelper.recipe_insert(5,14);
+                dbHelper.recipe_insert(5,19);
+                dbHelper.recipe_insert(5,18);
+
+                dbHelper.recipe_insert(6,21);
+                dbHelper.recipe_insert(6,7);
+                dbHelper.recipe_insert(6,25);
+                dbHelper.recipe_insert(6,22);
+                dbHelper.recipe_insert(6,18);
+
+                dbHelper.recipe_insert(7,0);
+                dbHelper.recipe_insert(7,1);
+                dbHelper.recipe_insert(7,23);
+                dbHelper.recipe_insert(7,24);
+                dbHelper.recipe_insert(7,18);
+
+//해시
+                dbHelper.hash_insert(0,"분식");
+                dbHelper.hash_insert(1,"분식");
+                dbHelper.hash_insert(2,"면식");
+                dbHelper.hash_insert(3,"면식");
+                dbHelper.hash_insert(4,"한식");
+                dbHelper.hash_insert(5,"한식");
+                dbHelper.hash_insert(6,"양식");
+                dbHelper.hash_insert(7,"양식");
+                dbHelper.hash_insert(0,"매콤");
+                dbHelper.hash_insert(1,"느끼");
+                dbHelper.hash_insert(2,"느끼");
+                dbHelper.hash_insert(3,"느끼");
+                dbHelper.hash_insert(4,"담백");
+                dbHelper.hash_insert(5,"매콤");
+                dbHelper.hash_insert(6,"매콤");
+                dbHelper.hash_insert(7,"담백");
 
                 Toast.makeText(getApplicationContext(),"테스트용 자료 넣었음 ",Toast.LENGTH_LONG).show();
             }
@@ -92,11 +176,18 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
         for(Button tempbutton : mbutton){
             if(tempbutton == newbutton){
                 ArrayList<Integer> food_id = dbHelper.food_search_by_ref(data[num]); //food_id 를 가저온다.
-                Toast.makeText(getApplicationContext(),data[num] +"으로 만들수 있는 요리 번호는 :"+food_id.toString() ,Toast.LENGTH_LONG).show();
+                if(food_id.size() ==0)
+                    Toast.makeText(getApplicationContext(),data[num] +"으로 만들수 있는 요리가 없습니다 " ,Toast.LENGTH_LONG).show();
+                else {
+                    Intent intent = new Intent(getApplication(),FoodSearch_Ref_activity.class);
+                    intent.putExtra("food_id",food_id);
+                    startActivity(intent);
+                }
             }
             num++;
         }
     }
+
 
 
     private void inti() {

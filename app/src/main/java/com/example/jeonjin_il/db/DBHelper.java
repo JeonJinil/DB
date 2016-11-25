@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 " material_id INTEGER , num INTEGER );");
 
         db.execSQL("CREATE TABLE MATERIAL (material_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                " material_name TEXT, material_type TEXT, remain_num INTEGER, price INTEGER, DATE INTEGER);");
+                " material_name TEXT, material_type TEXT, remain_num INTEGER, price INTEGER, DATE TEXT);");
 
         db.execSQL("CREATE TABLE RECIPE (food_id INTEGER,"+
                 " material_id INTEGER );");
@@ -93,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void material_insert(String name , String type , int num , int price , int date){
+    public void material_insert(String name , String type , int num , int price , String date){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("INSERT INTO MATERIAL VALUES(null, '" + name + "', '" + type + "'," + num +","+price +","+date+");");
         db.close();

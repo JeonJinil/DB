@@ -39,9 +39,9 @@ public class CircleTimerView extends View
     private static final float DEFAULT_GAP_BETWEEN_TIMER_NUMBER_AND_TEXT = 30;
 
     // Default color
-    private static final int DEFAULT_CIRCLE_COLOR = 0xFFE9E2D9;
+    private static final int DEFAULT_CIRCLE_COLOR = 0xFF111111;
     private static final int DEFAULT_CIRCLE_BUTTON_COLOR = 0xFFFFFFFF;
-    private static final int DEFAULT_LINE_COLOR = 0xFFE9E2D9;
+    private static final int DEFAULT_LINE_COLOR = 0xFF111111;
     private static final int DEFAULT_HIGHLIGHT_LINE_COLOR = 0xFFFF0000;
     private static final int DEFAULT_NUMBER_COLOR = 0x99866A60;
     private static final int DEFAULT_TIMER_NUMBER_COLOR = 0xFFFA7777;
@@ -148,8 +148,6 @@ public class CircleTimerView extends View
 
     private void initialize()
     {
-        Log.d(TAG, "initialize");
-        // Set default dimension or read xml attributes
         mGapBetweenCircleAndLine = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_GAP_BETWEEN_CIRCLE_AND_LINE,
                 getContext().getResources().getDisplayMetrics());
         mGapBetweenNumberAndLine = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_GAP_BETWEEN_NUMBER_AND_LINE,
@@ -457,7 +455,6 @@ public class CircleTimerView extends View
     @Override
     protected void onRestoreInstanceState(Parcelable state)
     {
-        Log.d(TAG, "onRestoreInstanceState");
         if (state instanceof Bundle)
         {
             Bundle bundle = (Bundle) state;
