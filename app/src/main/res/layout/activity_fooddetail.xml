@@ -35,14 +35,34 @@
                 android:textSize ="20dp"
                 android:textColor="#000000"
                 android:id="@+id/fooddetail_how"
-                android:background="#FFFFFF"/>
-            <Button
-                android:text="요리재료 사기"
-                android:textSize="20dp"
+                android:background="#FFFFFF"
+                />
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/fooddetail_buy"/>
-        </LinearLayout>
+                android:orientation="horizontal">
+
+                <Button
+                    android:text="재료 구매"
+                    android:textSize="20dp"
+                    android:textColor="#fffff0"
+                    android:layout_width="188dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fooddetail_buy"
+                    android:backgroundTint="#D2691E"/>
+
+                <Button
+                    android:text="Timer"
+                    android:textSize="20dp"
+                    android:textColor="#fffff0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/timer_button"
+                    android:backgroundTint="#D2691E"/>
+            </LinearLayout>
+
+            </LinearLayout>
+
 
 
 </ScrollView>

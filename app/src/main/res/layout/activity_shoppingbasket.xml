@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg1">
 
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:padding="10dp"
@@ -14,7 +14,7 @@
         android:id="@+id/findSelected"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find item that are Selected" />
+        android:text="선택한 재료 구매하기" />
 
     <ListView android:id="@+id/shopping_list" android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

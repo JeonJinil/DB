@@ -59,7 +59,7 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
 
 //음식
                 dbHelper.food_insert("라볶이","분식");
-                dbHelper.food_insert("치즈베이컨","분식");
+                dbHelper.food_insert("치즈 베이컨","분식");
                 dbHelper.food_insert("베이컨크림파스타","면식");
                 dbHelper.food_insert("봉골레파스타","면식");
                 dbHelper.food_insert("오믈렛","한식");

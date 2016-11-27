@@ -24,7 +24,7 @@ public class FoodDetail extends AppCompatActivity {
 
         Intent intent = getIntent();
         int food_icon = intent.getExtras().getInt("Food_icon");
-        String food_name = intent.getExtras().getString("Food_name");
+        final String food_name = intent.getExtras().getString("Food_name");
         String food_how = intent.getExtras().getString("Food_how");
 
         sc = (ScrollView) findViewById(R.id.fooddetail_layout);
@@ -38,7 +38,18 @@ public class FoodDetail extends AppCompatActivity {
         buy.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
                 Toast.makeText(getApplicationContext(),"아직 구현안했지롱 ",Toast.LENGTH_LONG).show();
+
+                dbHelper.fooddetail_Buy("user01",food_name);
+            }
+        });
+        Button timer = (Button)findViewById(R.id.timer_button);
+        timer.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(),TimerView.class);
+                startActivity(intent);
             }
         });
     }

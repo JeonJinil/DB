@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +40,6 @@ public class ShoppingBasket extends AppCompatActivity {
             case R.id.action_fridge:
                 Intent intent_ref = new Intent(getApplication(),FoodSearch_Ref.class);
                 startActivity(intent_ref);
-                return true;
-            case R.id.action_login :
-                Intent intent_login = new Intent(this,MainLogin.class);
-                startActivity(intent_login);
                 return true;
             case R.id.action_cart:
                 Intent intent_cart=  new Intent(this,ShoppingBasket.class);
@@ -74,38 +71,19 @@ public class ShoppingBasket extends AppCompatActivity {
     private void displayListView()
     {
         dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
-
-        ArrayList<ShoppingItem> ShoppingList=new ArrayList<ShoppingItem>();
-        ShoppingItem item;
-
-        ArrayList<String> list = dbHelper.material_list("user01");
-
-        Integer temp[] = new Integer[list.size()];
-        for(int i=0;i<list.size();i++){
-            temp[i] = 1;
-        }
+        //dbHelper.basket_delete();
+        //dbHelper.basket_insert("user01",1,4);
+        //dbHelper.basket_insert("user01",2,3);
+        //dbHelper.basket_insert("user01",3,2);
+        //dbHelper.basket_insert("user01",4,1);
+        ArrayList<ShoppingItem> ShoppingList= dbHelper.material_list("user01");
 
 
-        for(int i=0;i<list.size()-1;i++){
-            if(temp[i] == -1)
-                continue;
-            for(int j=i+1;j<list.size();j++){
-                if(list.get(i).equals(list.get(j))){
-                    temp[i]++;
-                    temp[j] = -1;
-                }
-            }
-        }
 
         Log.d("NUM","finish");
 
 
-        for(int num = 0;num < list.size();num++){
-            if(temp[num] == -1)
-                continue;
-            item = new ShoppingItem(list.get(num),temp[num], false);
-            ShoppingList.add(item);
-        }
+
         dataAdapter=new MyAdapter(this,R.layout.activity_shoppingitem,ShoppingList);
         ListView listView=(ListView)findViewById(R.id.shopping_list);
         listView.setAdapter(dataAdapter);
@@ -127,10 +105,12 @@ public class ShoppingBasket extends AppCompatActivity {
             this.ShoppingList = new ArrayList<ShoppingItem>();
             this.ShoppingList.addAll(ShoppingList);
         }
+        ArrayList<String> itemNum;
 
         private class ViewHolder {
             CheckBox name;
             TextView textView;
+            Spinner spinner;
         }
 
         @Override
@@ -143,6 +123,7 @@ public class ShoppingBasket extends AppCompatActivity {
                 holder = new ViewHolder();
                 holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
                 holder.textView = (TextView) convertView.findViewById(R.id.shopping_item_textview);
+                holder.spinner = (Spinner) convertView.findViewById(R.id.spinner);
 
                 convertView.setTag(holder);
                 holder.name.setOnClickListener(new View.OnClickListener() {
@@ -159,12 +140,28 @@ public class ShoppingBasket extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            ShoppingItem item = ShoppingList.get(position);
+            final ShoppingItem item = ShoppingList.get(position);
+            holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+                @Override
+                public void onItemSelected(AdapterView<?> parent,View view, int position, long id) {
+                    item.setBuynum(position + 1);
+                    Toast.makeText(getApplicationContext(), (item.getName()+" "+item.getBuynum()) + "개 선택", Toast.LENGTH_LONG).show();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent){}
+            });
             holder.name.setText(item.getName());
             holder.name.setChecked(item.isSelected());
             holder.name.setTag(item);
             Log.d("NUM",Integer.toString(item.getNum()));
             holder.textView.setText(Integer.toString(item.getNum()));
+            itemNum=new ArrayList<String>();
+            itemNum.addAll(item.getItemNum());
+            ArrayAdapter<String> adapter1=new ArrayAdapter<String>(
+                    getApplicationContext(),android.R.layout.simple_spinner_item,itemNum);
+            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            holder.spinner.setAdapter(adapter1);
+
             return convertView;
         }
     }
@@ -177,33 +174,34 @@ public class ShoppingBasket extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String temp="";
-                DBHelper db=new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
+                String temp = "";
+                DBHelper db = new DBHelper(getApplicationContext(), "FOOD1.db", null, 1);
 
                 StringBuffer responseText = new StringBuffer();
                 responseText.append("The following were selected...\n");
 
                 ArrayList<ShoppingItem> ShoppingList = dataAdapter.ShoppingList;
-                for(int i=0;i<ShoppingList.size();i++){
+                for (int i = 0; i < ShoppingList.size(); i++) {
                     ShoppingItem item = ShoppingList.get(i);
-                    if(item.isSelected()){
-                        responseText.append("\n" + item.getName());
-                        temp=temp+"@"+item.getName();
-                        Log.v("temp",temp);
+                    if (item.isSelected()) {
+                        responseText.append("\n" + item.getName() + " " + item.getBuynum() + "개");
+                        db.updateBasket("user01", item.getName(), item.getNum(), item.getBuynum());
+                        item.setNum(item.getNum() - item.getBuynum());
 
                     }
+
+                    Toast.makeText(getApplicationContext(),
+                            responseText, Toast.LENGTH_LONG).show();
+
+
                 }
-                db.updateBasket(temp);
-
-                Toast.makeText(getApplicationContext(),
-                        responseText, Toast.LENGTH_LONG).show();
-
-
             }
         });
 
     }
+    }
 
 
-}
+
+
 

@@ -1,68 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.ss.bottomnavigation.BottomNavigation
-        android:id="@+id/bottom_navigation"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent">
-        <com.ss.bottomnavigation.TabItem
-            android:id="@+id/tab_home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/search"
-            app:tab_text="Home"
-            app:tab_icon="@drawable/search"
-            />
-        <com.ss.bottomnavigation.TabItem
-            android:id="@+id/tab_images"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/search"
+        android:layout_height="wrap_content">
 
-            app:tab_text="Images"
-            app:tab_icon="@drawable/search"
-            />
-        <com.ss.bottomnavigation.TabItem
-            android:id="@+id/tab_camera"
-            android:background="@drawable/search"
-
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/et_adminSearch"
             android:layout_weight="1"
-            app:tab_text="Camera"
-            app:tab_icon="@drawable/korea"
-            />
-        <com.ss.bottomnavigation.TabItem
-            android:id="@+id/tab_products"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/search"
+            android:inputType="text"
+            android:hint="검색어를 입력하세요" />
 
-            android:layout_weight="1"
-            app:tab_text="Products"
-            app:tab_icon="@drawable/search"
-            />
-        <com.ss.bottomnavigation.TabItem
-            android:id="@+id/tab_more"
-            android:layout_width="0dp"
-            android:background="@drawable/search"
-
+        <Button
+            android:layout_width="46dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:tab_text="More"
-            app:tab_icon="@drawable/search"
-            />
-    </com.ss.bottomnavigation.BottomNavigation>
-    <FrameLayout
-        android:id="@+id/frame_fragment_containers"
+            android:id="@+id/btn_adminSearch"
+            android:scaleType="fitCenter"
+            android:background="@android:drawable/ic_menu_search" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"/>
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_adminMaterialList"
+        android:layout_weight="1"
+        android:orientation="horizontal" />
+
+    <Button
+        android:text="변경"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_adminSubmit" />
+
+</LinearLayout>

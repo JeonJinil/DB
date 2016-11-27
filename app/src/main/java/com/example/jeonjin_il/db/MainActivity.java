@@ -29,10 +29,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent_ref = new Intent(getApplication(),FoodSearch_Ref.class);
             startActivity(intent_ref);
             return true;
-        case R.id.action_login :
-            Intent intent_login = new Intent(this,MainLogin.class);
-            startActivity(intent_login);
-            return true;
         case R.id.action_cart:
             Intent intent_cart=  new Intent(this,ShoppingBasket.class);
             startActivity(intent_cart);
@@ -59,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigation bottomNavigation=(BottomNavigation)findViewById(R.id.bottom_navigation);
         bottomNavigation.setDefaultItem((byte)2);
 
+        setDefault();
         bottomNavigation.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
             @Override
             public void onSelectedItemChanged(int itemId) {
@@ -89,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void setDefault(){
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_fragment_containers,new mainFragment());
+        transaction.commit();
+    }
 
     }
 

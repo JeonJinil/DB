@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="#D2691E"
     tools:context="com.example.jeonjin_il.db.MainActivity">
 
     <FrameLayout
@@ -14,7 +14,7 @@
         android:layout_height="400dp">
         <android.support.v7.widget.CardView
             android:id="@+id/cv_add"
-            app:cardBackgroundColor="#2ea67f"
+            app:cardBackgroundColor="#fffff0"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:text="@string/register"
-                    android:textColor="#fff"
+                    android:textColor="#D2691E"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     />
@@ -45,14 +45,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
                     <android.support.design.widget.TextInputLayout
-                        android:textColorHint="#f0f7f4"
+                        android:textColorHint="#D2691E"
                         android:layout_width="match_parent"
                         android:theme="@style/TextLabel"
                         android:layout_height="wrap_content">
                         <EditText
                             android:textSize="13sp"
                             android:hint="@string/Username"
-                            android:textColor="#f0f7f4"
+                            android:textColor="#D2691E"
                             android:id="@+id/et_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -71,14 +71,14 @@
                     android:layout_height="40dp">
                     <android.support.design.widget.TextInputLayout
 
-                        android:textColorHint="#f0f7f4"
+                        android:textColorHint="#D2691E"
                         android:theme="@style/TextLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <EditText
                             android:textSize="13sp"
                             android:hint="@string/Password"
-                            android:textColor="#f0f7f4"
+                            android:textColor="#D2691E"
                             android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -101,8 +101,8 @@
                         android:layout_height="match_parent"
                         android:text="Male"
                         android:layout_marginLeft="80dp"
-                        android:textColor="#f0f7f4"
-                        android:buttonTint="#f0f7f4"
+                        android:textColor="#D2691E"
+                        android:buttonTint="#D2691E"
                         android:id="@+id/male"/>
 
                     <CheckBox
@@ -110,8 +110,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Female"
-                        android:textColor="#f0f7f4"
-                        android:buttonTint="#f0f7f4"
+                        android:textColor="#D2691E"
+                        android:buttonTint="#D2691E"
                         android:id="@+id/female"/>
                 </LinearLayout>
                 <Button
@@ -123,7 +123,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:text="@string/next"
-                    android:textColor="#2fa881"
+                    android:textColor="#D2691E"
                     android:onClick="click_Next"
                     >
                 </Button>
