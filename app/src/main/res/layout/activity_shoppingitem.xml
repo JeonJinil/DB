@@ -15,7 +15,7 @@
         android:text="CheckBox" />
 
     <TextView
-        android:text="10101010"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -23,9 +23,10 @@
         android:layout_marginEnd="82dp"
         android:id="@+id/shopping_item_textview" />
     <Spinner
-        android:layout_width="70dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
+
         android:layout_alignBottom="@+id/checkBox1"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="15dp" />

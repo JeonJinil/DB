@@ -2,6 +2,7 @@ package com.example.jeonjin_il.db;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,36 +29,6 @@ import java.util.ArrayList;
 public class ShoppingBasket extends AppCompatActivity {
     DBHelper dbHelper;
     MyAdapter dataAdapter=null;
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.action_search :
-                Intent intent_hash = new Intent(getApplication(),FoodSearch_Hash.class);
-                startActivity(intent_hash);
-                return true;
-            case R.id.action_fridge:
-                Intent intent_ref = new Intent(getApplication(),FoodSearch_Ref.class);
-                startActivity(intent_ref);
-                return true;
-            case R.id.action_cart:
-                Intent intent_cart=  new Intent(this,ShoppingBasket.class);
-                startActivity(intent_cart);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +59,13 @@ public class ShoppingBasket extends AppCompatActivity {
         ListView listView=(ListView)findViewById(R.id.shopping_list);
         listView.setAdapter(dataAdapter);
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 ShoppingItem item = (ShoppingItem) parent.getItemAtPosition(position);
+
                 Toast.makeText(getApplicationContext(), "Clicked on Row: " + item.getName(), Toast.LENGTH_LONG).show();
 
             }
@@ -115,7 +89,7 @@ public class ShoppingBasket extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
+             ViewHolder holder = null;
             if (convertView == null) {
                 LayoutInflater v = (LayoutInflater) getSystemService
                         (Context.LAYOUT_INFLATER_SERVICE);
@@ -124,6 +98,7 @@ public class ShoppingBasket extends AppCompatActivity {
                 holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
                 holder.textView = (TextView) convertView.findViewById(R.id.shopping_item_textview);
                 holder.spinner = (Spinner) convertView.findViewById(R.id.spinner);
+
 
                 convertView.setTag(holder);
                 holder.name.setOnClickListener(new View.OnClickListener() {
@@ -157,11 +132,14 @@ public class ShoppingBasket extends AppCompatActivity {
             holder.textView.setText(Integer.toString(item.getNum()));
             itemNum=new ArrayList<String>();
             itemNum.addAll(item.getItemNum());
+
+
             ArrayAdapter<String> adapter1=new ArrayAdapter<String>(
-                    getApplicationContext(),android.R.layout.simple_spinner_item,itemNum);
+                    getApplicationContext(),R.layout.spinner,itemNum);
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             holder.spinner.setAdapter(adapter1);
 
+            holder.spinner.setSelection(item.getNum()-1);
             return convertView;
         }
     }
@@ -195,6 +173,7 @@ public class ShoppingBasket extends AppCompatActivity {
 
 
                 }
+                displayListView();
             }
         });
 
