@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,7 +27,7 @@ public class ShoppingBasket extends AppCompatActivity {
     DBHelper dbHelper;
     MyAdapter dataAdapter=null;
 
-    @Override
+@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoppingbasket);
@@ -42,18 +39,8 @@ public class ShoppingBasket extends AppCompatActivity {
     private void displayListView()
     {
         dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
-        //dbHelper.basket_delete();
-        //dbHelper.basket_insert("user01",1,4);
-        //dbHelper.basket_insert("user01",2,3);
-        //dbHelper.basket_insert("user01",3,2);
-        //dbHelper.basket_insert("user01",4,1);
+
         ArrayList<ShoppingItem> ShoppingList= dbHelper.material_list("user01");
-
-
-
-        Log.d("NUM","finish");
-
-
 
         dataAdapter=new MyAdapter(this,R.layout.activity_shoppingitem,ShoppingList);
         ListView listView=(ListView)findViewById(R.id.shopping_list);

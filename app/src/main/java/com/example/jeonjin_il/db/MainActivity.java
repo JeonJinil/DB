@@ -7,21 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.ss.bottomnavigation.BottomNavigation;
 import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button go_ref , go_ran , go_hash , go_basket ,go_list;
     private FragmentTransaction transaction;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
     switch(item.getItemId()){
-        case R.id.action_search :
+        case R.id.action_random :
+            Intent intent_random = new Intent(getApplication(),FoodSearch_Random.class);
+            startActivity(intent_random);
+            return true;
+        case R.id.action_hash :
             Intent intent_hash = new Intent(getApplication(),FoodSearch_Hash.class);
             startActivity(intent_hash);
             return true;
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         BottomNavigation bottomNavigation=(BottomNavigation)findViewById(R.id.bottom_navigation);
         bottomNavigation.setDefaultItem((byte)2);
