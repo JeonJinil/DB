@@ -1,14 +1,10 @@
 package com.example.jeonjin_il.db;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,34 +26,6 @@ public class ShoppingBasket extends AppCompatActivity {
     MyAdapter dataAdapter=null;
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.action_search :
-                Intent intent_hash = new Intent(getApplication(),FoodSearch_Hash.class);
-                startActivity(intent_hash);
-                return true;
-            case R.id.action_fridge:
-                Intent intent_ref = new Intent(getApplication(),FoodSearch_Ref.class);
-                startActivity(intent_ref);
-                return true;
-            case R.id.action_cart:
-                Intent intent_cart=  new Intent(this,ShoppingBasket.class);
-                startActivity(intent_cart);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,18 +39,8 @@ public class ShoppingBasket extends AppCompatActivity {
     private void displayListView()
     {
         dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
-        //dbHelper.basket_delete();
-        //dbHelper.basket_insert("user01",1,4);
-        //dbHelper.basket_insert("user01",2,3);
-        //dbHelper.basket_insert("user01",3,2);
-        //dbHelper.basket_insert("user01",4,1);
+
         ArrayList<ShoppingItem> ShoppingList= dbHelper.material_list("user01");
-
-
-
-        Log.d("NUM","finish");
-
-
 
         dataAdapter=new MyAdapter(this,R.layout.activity_shoppingitem,ShoppingList);
         ListView listView=(ListView)findViewById(R.id.shopping_list);

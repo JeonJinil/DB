@@ -43,10 +43,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public boolean isinti(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM HASH ", null);
+        while(cursor.moveToNext()){
+            return true;
+        }
+        return false;
+    }
+
 
     public ArrayList<Integer> food_hash(String str){
         ArrayList<Integer> ret = new ArrayList<Integer>();
@@ -97,7 +108,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void material_insert(String name , String type , int num , int price , String date){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO MATERIAL VALUES(null, '" + name + "', '" + type + "'," + num +","+price +","+date+");");
+        db.execSQL("INSERT INTO MATERIAL VALUES(null, '" + name + "', '" + type + "'," + num +","+price +",'"+date+"');");
         db.close();
     }
 
@@ -148,7 +159,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return -1;
     }
 
-////////////////////////////////////////////////////////////////짱구
 
     public void fooddetail_Buy(String user_id,String food_name) {
         SQLiteDatabase db = getWritableDatabase();

@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/action_random"
         android:orderInCategory="100"
-        android:icon="@drawable/search"
+        android:icon="@drawable/random"
+        android:title="search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_hash"
+        android:orderInCategory="100"
+        android:icon="@drawable/hash"
         android:title="search"
         app:showAsAction="always" />
     <item
