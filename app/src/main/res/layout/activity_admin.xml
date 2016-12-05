@@ -4,28 +4,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:id="@+id/et_adminSearch"
-            android:layout_weight="1"
+            android:layout_centerVertical="true"
             android:inputType="text"
-            android:hint="검색어를 입력하세요" />
+            android:hint="재료 이름"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_toStartOf="@+id/spn_adminSort" />
 
         <Button
             android:layout_width="46dp"
             android:layout_height="match_parent"
             android:id="@+id/btn_adminSearch"
-            android:scaleType="fitCenter"
-            android:background="@android:drawable/ic_menu_search" />
+            android:layout_centerVertical="true"
+            android:background="@android:drawable/ic_menu_search"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/et_adminSearch" />
 
-    </LinearLayout>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chbx_adminSortReverse"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_adminSearch"
+            android:text="역순으로" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spn_adminSort"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/chbx_adminSortReverse"
+            android:entries="@array/array_adminList" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +55,7 @@
         android:orientation="horizontal" />
 
     <Button
-        android:text="변경"
+        android:text="적용"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_adminSubmit" />

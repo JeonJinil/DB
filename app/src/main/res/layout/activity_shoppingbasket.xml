@@ -7,14 +7,16 @@
 
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:padding="10dp"
-        android:text="@string/some_text" android:textSize="20sp" />
+        android:text="@string/some_text" android:textSize="20sp" android:textColor="#D2691E" />
 
 
     <Button
         android:id="@+id/findSelected"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="선택한 재료 구매하기" />
+        android:text="선택한 재료 구매하기"
+        android:backgroundTint="#D2691E"
+        android:textColor="#fffff0"/>
 
     <ListView android:id="@+id/shopping_list" android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

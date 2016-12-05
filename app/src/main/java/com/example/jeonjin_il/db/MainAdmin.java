@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,9 +21,18 @@ import java.util.ArrayList;
  * Created by jeonjin-il on 2016. 11. 10..
  */
 public class MainAdmin extends FragmentActivity {
-    AdminItemListFragment list;
-    DBHelper dbHelper;
-    EditText etSearch;
+    private DBHelper dbHelper;
+    private AdminItemListFragment listFragment;
+    private FragmentTransaction transaction;
+
+    private EditText etSearch;
+    private Spinner spnSort;
+    private CheckBox chbxReverse;
+    private Button btnSubmit;
+
+    private int sortType = 0; // 0 = 이름순, 1 = 재고순, 2 = 갱신날짜순
+    private boolean reverse = false; // true = 역순
+    private String lastSearch = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +41,19 @@ public class MainAdmin extends FragmentActivity {
 
         etSearch = (EditText) findViewById(R.id.et_adminSearch);
         Button btnSearch = (Button) findViewById(R.id.btn_adminSearch);
-        Button btnSubmit = (Button) findViewById(R.id.btn_adminSubmit);
+        btnSubmit = (Button) findViewById(R.id.btn_adminSubmit);
+        spnSort = (Spinner) findViewById(R.id.spn_adminSort);
+        chbxReverse = (CheckBox) findViewById(R.id.chbx_adminSortReverse);
+
         dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
+        updateArgs();
 
         etSearch.setOnKeyListener(new EditText.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(keyCode == KeyEvent.KEYCODE_ENTER){
-                    fragmentReplace(etSearch.getText().toString());
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    updateArgs();
+                    Toast.makeText(v.getContext(),String.format("%d개의 검색 결과가 있습니다.", listFragmentReplaceByName()),Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 return false;
@@ -46,37 +62,54 @@ public class MainAdmin extends FragmentActivity {
         btnSearch.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentReplace(etSearch.getText().toString());
+                updateArgs();
+                Toast.makeText(v.getContext(),String.format("%d개의 검색 결과가 있습니다.", listFragmentReplaceByName()),Toast.LENGTH_SHORT).show();
             }});
         btnSubmit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.updateMaterial();
-                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                int size = listFragment.updateMaterial();
+                if(size != 0){
+                    listFragmentReplaceByName();
+                    Toast.makeText(v.getContext(),String.format("%d개 재료 정보를 수정하였습니다.", size),Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(v.getContext(),"변경할 재료를 선택해주세요.",Toast.LENGTH_SHORT).show();
+                }
             }});
 
-        fragmentReplace("");
+        Toast.makeText(this,String.format("현재 DB에 %d개의 재료가 있습니다.", listFragmentReplaceByName()),Toast.LENGTH_SHORT).show();
     }
 
-    private void fragmentReplace(String item) {
-        ArrayList<Integer> itemId = dbHelper.getMaterialListByName(item);
-        for(Integer i : itemId){
-            Log.d("TAG",i.toString());
-        }
+    private int listFragmentReplaceByName() {
+        ArrayList<Integer> results = dbHelper.getMaterialListByName(lastSearch, sortType, reverse);
         Bundle args = new Bundle();
-        args.putIntegerArrayList("item", itemId);
+        args.putIntegerArrayList("item", results);
 
-        list = new AdminItemListFragment();
-        list.setArguments(args);
+        listFragment = new AdminItemListFragment();
+        listFragment.setArguments(args);
 
-        // replace fragment
-        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        fragmentReplace();
+        return results.size();
+    }
 
-        transaction.replace(R.id.frame_adminMaterialList, list);
-
-        // Commit the transaction
+    private void fragmentReplace(){
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_adminMaterialList, listFragment);
         transaction.commit();
+
+        hideKeyboard();
+    }
+
+    protected void updateArgs(){
+        lastSearch = etSearch.getText().toString();
+        sortType = spnSort.getSelectedItemPosition();
+        reverse = chbxReverse.isChecked();
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
     }
 }
 

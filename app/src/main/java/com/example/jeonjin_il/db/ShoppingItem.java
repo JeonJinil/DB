@@ -8,15 +8,19 @@ import java.util.ArrayList;
 
 public class ShoppingItem {
     String name=null;
+    int remain = 0;
+    String date = null;
     int num = 0;
     boolean selected=false;
     ArrayList<String> itemNum=null;
     int buynum;
 
-    public ShoppingItem(String name,int num,boolean selected)
+    public ShoppingItem(String name,int num,boolean selected,int remain_num, String date)
     {
         this.name=name;
         this.num = num;
+        this.remain = remain_num;
+        this.date = date;
         this.selected=selected;
         this.itemNum=new ArrayList<String>();
         for(int i=0; i<num; i++)
@@ -51,4 +55,7 @@ public class ShoppingItem {
     }
     public void setBuynum(int num){this.buynum=num;}
     public int getBuynum(){return this.buynum;}
+
+    int getRemain(){return this.remain;}
+    String getDate(){return this.date;}
 }

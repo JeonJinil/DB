@@ -52,9 +52,6 @@ public class ShoppingBasket extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 ShoppingItem item = (ShoppingItem) parent.getItemAtPosition(position);
-
-                Toast.makeText(getApplicationContext(), "Clicked on Row: " + item.getName(), Toast.LENGTH_LONG).show();
-
             }
         });
     }
@@ -86,13 +83,11 @@ public class ShoppingBasket extends AppCompatActivity {
                 holder.textView = (TextView) convertView.findViewById(R.id.shopping_item_textview);
                 holder.spinner = (Spinner) convertView.findViewById(R.id.spinner);
 
-
                 convertView.setTag(holder);
                 holder.name.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         CheckBox cb = (CheckBox) v;
                         ShoppingItem item = (ShoppingItem) cb.getTag();
-                        Toast.makeText(getApplicationContext(), "Clicked on Checkbox: " + cb.getText() + " is " + cb.isChecked(), Toast.LENGTH_LONG).show();
                         item.setSelected(cb.isChecked());
 
                     }
@@ -107,7 +102,6 @@ public class ShoppingBasket extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent,View view, int position, long id) {
                     item.setBuynum(position + 1);
-                    Toast.makeText(getApplicationContext(), (item.getName()+" "+item.getBuynum()) + "개 선택", Toast.LENGTH_LONG).show();
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent){}
@@ -115,8 +109,7 @@ public class ShoppingBasket extends AppCompatActivity {
             holder.name.setText(item.getName());
             holder.name.setChecked(item.isSelected());
             holder.name.setTag(item);
-            Log.d("NUM",Integer.toString(item.getNum()));
-            holder.textView.setText(Integer.toString(item.getNum()));
+            holder.textView.setText(item.getDate());
             itemNum=new ArrayList<String>();
             itemNum.addAll(item.getItemNum());
 
@@ -131,34 +124,49 @@ public class ShoppingBasket extends AppCompatActivity {
         }
     }
     private void checkButtonClick() {
-
-
         Button myButton = (Button) findViewById(R.id.findSelected);
-
         myButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 String temp = "";
+                int price=0;
+                int total_price=0;
+                boolean buy_flag = true;
                 DBHelper db = new DBHelper(getApplicationContext(), "FOOD1.db", null, 1);
 
                 StringBuffer responseText = new StringBuffer();
-                responseText.append("The following were selected...\n");
-
                 ArrayList<ShoppingItem> ShoppingList = dataAdapter.ShoppingList;
                 for (int i = 0; i < ShoppingList.size(); i++) {
                     ShoppingItem item = ShoppingList.get(i);
                     if (item.isSelected()) {
-                        responseText.append("\n" + item.getName() + " " + item.getBuynum() + "개");
-                        db.updateBasket("user01", item.getName(), item.getNum(), item.getBuynum());
-                        item.setNum(item.getNum() - item.getBuynum());
-
+                        if(item.getRemain() - item.getBuynum()  < 0 ){
+                            responseText.append(item.getName() + "의 남은 개수는 " + item.getRemain()+ "개 입니다.\n");
+                            buy_flag = false;
                     }
-
+                    }
+                }
+                if(buy_flag) {
+                    for (int i = 0; i < ShoppingList.size(); i++) {
+                        ShoppingItem item = ShoppingList.get(i);
+                        if (item.isSelected()) {
+                            price = 0;
+                            responseText.append("\n" + item.getName() + " " + item.getBuynum() + "개");
+                                price = db.updateBasket("user01", item.getName(), item.getNum(), item.getBuynum());
+                                item.setNum(item.getNum() - item.getBuynum());
+                                price = price * item.getBuynum();
+                                total_price = total_price + price;
+                        }
+                    }
+                }
+                if(buy_flag) {
+                    responseText.append("\n" + "총 " + total_price + "원");
                     Toast.makeText(getApplicationContext(),
-                            responseText, Toast.LENGTH_LONG).show();
-
-
+                            responseText, Toast.LENGTH_SHORT).show();
+                }else{
+                    responseText.append("개수를 조정해주세요! ^^");
+                    Toast.makeText(getApplicationContext(),
+                            responseText, Toast.LENGTH_SHORT).show();
                 }
                 displayListView();
             }

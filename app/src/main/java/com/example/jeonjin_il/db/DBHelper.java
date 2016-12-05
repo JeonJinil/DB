@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -220,10 +221,10 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<ShoppingItem> ret = new ArrayList<ShoppingItem>();
         SQLiteDatabase db=getReadableDatabase();
         ShoppingItem item;
-        Cursor cursor=db.rawQuery("SELECT material_name,num FROM BASKET,MATERIAL WHERE user_id='"+ id +"' and  MATERIAL.material_id=BASKET.material_id",null);
+        Cursor cursor=db.rawQuery("SELECT material_name,num,remain_num,DATE FROM BASKET,MATERIAL WHERE user_id='"+ id +"' and  MATERIAL.material_id=BASKET.material_id",null);
 
         while(cursor.moveToNext()) {
-            item=new ShoppingItem(cursor.getString(0),cursor.getInt(1),false);
+            item=new ShoppingItem(cursor.getString(0),cursor.getInt(1),false,cursor.getInt(2), cursor.getString(3));
             ret.add(item);
 
         }
@@ -231,17 +232,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return ret;
     }
 
-    public void updateBasket(String user_id,String material_name,int num,int Buynum)
+    public int updateBasket(String user_id,String material_name,int num,int Buynum)
     { // num은 한 재료의 장바구니 안에 있는 개수 Buynum은 유저가 한 재료를 구매한 개수
         int material_id;
         int remain;
         int update_remain;
         int update_num;
+        int price;
+        String date;
         SQLiteDatabase db=getWritableDatabase();
         Cursor cursor=db.rawQuery( //material_id 가져오기
-                "SELECT material_id FROM MATERIAL WHERE MATERIAL.material_name='"+ material_name +"'",null);
+                "SELECT material_id,price FROM MATERIAL WHERE MATERIAL.material_name='"+ material_name +"'",null);
         cursor.moveToNext();
         material_id=cursor.getInt(0); // material_id를 가져왔다
+        price=cursor.getInt(1); //material의 price를 가져왔다
+
+
 
         if((num-Buynum)==0) //장바구니에 담겨있는 한 재료를 모두 구매할 때 BASKET에서 그 재료 지우기
         {
@@ -258,18 +264,29 @@ public class DBHelper extends SQLiteOpenHelper {
         update_remain=remain-Buynum;
         db.execSQL("UPDATE MATERIAL SET remain_num='"+ update_remain +"' WHERE material_id='"+ material_id +"'");
         //db.execSQL("INSERT INTO BASKET VALUES(null,'"+ basket_id +"','"+ material +"')");
+
         db.close();
+        return price;
     }
     /////// 해람
-    public ArrayList<Integer> getMaterialListByName(String name){
+    public ArrayList<Integer> getMaterialListByName(String name, int sortType, boolean reverse){
         ArrayList<Integer> ret = new ArrayList<Integer>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor;
 
-        if(!name.equals("")){
-            cursor = db.rawQuery(String.format("SELECT material_id FROM MATERIAL WHERE material_name like '%%%s%%'", name), null);
+        String sortString, reverseString;
+        switch(sortType){
+            case 1: sortString = "remain_num"; if(reverse) reverseString = "DESC"; else reverseString = "ASC"; break;
+            case 2: sortString = "DATE"; if(reverse) reverseString = "ASC"; else reverseString = "DESC"; break;
+            default: sortString = "material_name"; if(reverse) reverseString = "DESC"; else reverseString = "ASC";
         }
-        else cursor = db.rawQuery(String.format("SELECT material_id FROM MATERIAL"), null);
+
+        if(!name.equals("")){
+            cursor = db.rawQuery(String.format("SELECT material_id FROM MATERIAL WHERE material_name like '%%%s%%'" +
+                    "ORDER BY %s %s", name, sortString, reverseString), null);
+        }
+        else cursor = db.rawQuery(String.format("SELECT material_id FROM MATERIAL " +
+                "ORDER BY %s %s", sortString, reverseString), null);
         while(cursor.moveToNext()){
             ret.add(cursor.getInt(0));
         }
@@ -279,15 +296,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public MaterialListItem materialSearchById(int i) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(String.format("SELECT material_name, remain_num FROM MATERIAL WHERE material_id = %d", i), null);
-        Log.d("TAG",String.format("SELECT material_name, remain_num FROM MATERIAL WHERE material_id = %d", i));
+        Cursor cursor = db.rawQuery(String.format("SELECT material_name, remain_num, DATE FROM MATERIAL WHERE material_id = %d", i), null);
 
         MaterialListItem item = new MaterialListItem();
         if(cursor.moveToNext()){
-            item.setFood_name(cursor.getString(0));
+            item.setName(cursor.getString(0));
             item.setRemain(cursor.getInt(1));
+            item.setDate(cursor.getString(2));
         }
-        else{ item.setFood_name("null"); item.setRemain(0); }
+        else{ item.setName("null"); item.setRemain(0); }
 
         db.close();
         return item;
@@ -297,15 +314,42 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         for(MaterialListItem item : list){
-            db.execSQL(String.format("UPDATE MATERIAL SET remain_num = %d, DATE = '%s' WHERE material_name = '%s'", item.getRemain(), date, item.getFood_name()));
+            db.execSQL(String.format("UPDATE MATERIAL SET remain_num = %d, DATE = '%s' WHERE material_name = '%s'", item.getRemain(), date, item.getName()));
 //            db.execSQL("UPDATE BASKET SET material='"+ material1 +"' WHERE basket_id="+"'user01';");
         }
         db.close();
     }
 
+    public ArrayList<TextView> getTagCloud(Context c){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<TextView> ret = new ArrayList<TextView>();
+        TextView tv;
+        int sum;
+        float size;
 
+        Cursor cursor = db.rawQuery(String.format("SELECT count(*) FROM HASH"), null);
+        if(cursor.moveToNext()){
+            sum = cursor.getInt(0);
 
+            Log.d("TAG",String.format("sum = %d", cursor.getInt(0)));
+        }
+        else return ret;
 
+        cursor = db.rawQuery(String.format("SELECT tag, count(*) FROM HASH GROUP BY tag"), null);
+        while(cursor.moveToNext()){
+            tv = new TextView(c);
+            tv.setPadding(3,3,3,3);
+            tv.setText("#" + cursor.getString(0));
+            size = Math.max(12, ((float) (cursor.getInt(1) ^ (3/4)) / sum) * 150);
+            tv.setTextSize(size);
+            tv.measure(0, 0);
+            ret.add(tv);
+
+            Log.d("TAG",String.format("tag = %s, count = %d, size = %.2f", cursor.getString(0), cursor.getInt(1), size));
+        }
+
+        return ret;
+    }
 }
 
 

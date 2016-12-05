@@ -182,13 +182,13 @@ public class MainLogin extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "응 관리자~",Toast.LENGTH_LONG).show();
             Intent adminIntent = new Intent(this,MainAdmin.class);
             startActivity(adminIntent);
-            finish();
+
         }
         else{
             Toast.makeText(getApplicationContext(),"응 맞아~",Toast.LENGTH_LONG).show();
             Intent guestIntent = new Intent(this, MainActivity.class);
             startActivity(guestIntent);
-            finish();
+
         }
 
 

@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:padding="6dip" >
 
     <CheckBox
@@ -14,22 +13,21 @@
         android:focusableInTouchMode="false"
         android:text="CheckBox" />
 
-    <TextView
-
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="82dp"
-        android:id="@+id/shopping_item_textview" />
-    <Spinner
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
         android:id="@+id/spinner"
-
         android:layout_alignBottom="@+id/checkBox1"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shopping_item_textview"
+        android:layout_alignRight="@+id/spinner"
+        android:layout_marginRight="100dp"
+        android:textColor="#D2691E"/>
 
 
 </RelativeLayout>
