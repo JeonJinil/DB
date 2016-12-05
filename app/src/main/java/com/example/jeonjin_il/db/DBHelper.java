@@ -169,30 +169,30 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT food_id FROM FOOD WHERE food_name='" + food_name + "'", null);
         Log.v("음식",food_name);
         cursor.moveToNext();
-        food_id = cursor.getInt(0);
+        food_id = cursor.getInt(0) -1;
         Log.v("음식id",Integer.toString(food_id));
         cursor = db.rawQuery("SELECT material_id FROM RECIPE WHERE food_id='" + food_id + "'", null);
 
         Cursor cursor1 = db.rawQuery("SELECT material_id FROM BASKET WHERE user_id='" + user_id + "'", null);
         while (cursor.moveToNext()) {
             while (cursor1.moveToNext()) {
-                Log.v("재료",Integer.toString(cursor.getInt(0)));
-                if (cursor.getInt(0) == cursor1.getInt(0)) {
+                Log.v("재료",Integer.toString(cursor.getInt(0)+1));
+                if ((cursor.getInt(0)+1) == cursor1.getInt(0)) {
                     Cursor temp = db.rawQuery("SELECT num " +
                             "FROM BASKET " +
-                            "WHERE user_id='" + user_id + "' and material_id='" + cursor.getInt(0) + "'", null);
+                            "WHERE user_id='" + user_id + "' and material_id='" + (cursor.getInt(0)+1) + "'", null);
                     temp.moveToNext();
                     int mate_num = temp.getInt(0);
                     mate_num++;
                     db.execSQL("UPDATE BASKET SET num='" + mate_num + "' " +
-                            "WHERE user_id='" + user_id + "' and material_id='" + cursor.getInt(0) + "'");
+                            "WHERE user_id='" + user_id + "' and material_id='" + (cursor.getInt(0)+1) + "'");
                     flag=1;
                     break;
                 }
             }
             if(flag==0)
             {
-                db.execSQL("INSERT INTO BASKET VALUES('"+user_id+"','"+cursor.getInt(0)+"',1)");
+                db.execSQL("INSERT INTO BASKET VALUES('"+user_id+"','"+(cursor.getInt(0)+1)+"',1)");
             }
             cursor1.moveToFirst();
             flag=0;

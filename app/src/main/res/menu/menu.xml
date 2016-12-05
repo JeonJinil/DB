@@ -5,13 +5,13 @@
     <item
         android:id="@+id/action_random"
         android:orderInCategory="100"
-        android:icon="@drawable/random"
+        android:icon="@drawable/questionmark"
         android:title="search"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_hash"
         android:orderInCategory="100"
-        android:icon="@drawable/hash"
+        android:icon="@drawable/hashtag"
         android:title="search"
         app:showAsAction="always" />
     <item

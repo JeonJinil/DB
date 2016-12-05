@@ -2,20 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg1"
+    android:background="@drawable/bg3"
     >
     <Space
         android:layout_width="match_parent"
         android:layout_height="50dp" />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="냉장고속 재료를 선택해주세요"
+        android:text="Choose your material"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="in refrigerator"
+        android:textSize="15dp"
+        android:gravity="center_horizontal"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="50dp" />
@@ -37,81 +42,209 @@
             android:layout_weight="1"
             android:layout_gravity="center_horizontal">
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button11"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button11"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text ="돼지고기"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ref_button12"
-                android:layout_weight="1"/>
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button13"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button12"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text ="소고기"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button13"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text ="닭고기"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal">
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button21"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button21"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text ="생 선"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
-            <Button
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button22"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button22"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text ="유제품"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button23"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button23"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text ="달걀"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal">
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button31"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button31"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text ="채 소"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
-            <Button
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button32"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button32"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text ="과 일"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ref_button33"
-                android:layout_weight="1"/>
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ref_button33"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text ="가공식품"
+                    android:textSize = "20dp"
+                    android:textColor="#80581f"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
 
         </LinearLayout>
 

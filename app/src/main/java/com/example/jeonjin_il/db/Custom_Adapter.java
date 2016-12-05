@@ -19,13 +19,14 @@ public class Custom_Adapter extends BaseAdapter {
     ArrayList<FoodListItem> datas;
     LayoutInflater inflater;
     Context context;
-
-    public Custom_Adapter(LayoutInflater inflater, ArrayList<FoodListItem> datas, Context context) {
+    String str;
+    public Custom_Adapter(LayoutInflater inflater, ArrayList<FoodListItem> datas, Context context, String id) {
         // TODO Auto-generated constructor stub
 
         this.datas = datas;
         this.inflater = inflater;
         this.context =context;
+        this.str = id;
     }
 
 
@@ -67,6 +68,7 @@ public class Custom_Adapter extends BaseAdapter {
                 intent.putExtra("Food_name", datas.get(position).getFood_name());
                 intent.putExtra("Food_icon", datas.get(position).getIconDrawable());
                 intent.putExtra("Food_how", datas.get(position).getHow());
+                intent.putExtra("ID",str);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

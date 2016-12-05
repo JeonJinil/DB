@@ -3,6 +3,7 @@ package com.example.jeonjin_il.db;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class SnackFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         inflater.inflate(R.layout.fragment_snack, container, false);
+        String str = getArguments().getString("ID");
+        Log.i("TAG",str);
         // Inflate the layout for this fragment
         LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_snack, container, false);
 
@@ -38,7 +41,7 @@ public class SnackFragment extends Fragment  {
         datas.add(new FoodListItem(R.drawable.food_1,readTxt(R.raw.namefood_1),readTxt(R.raw.howfood_1)));
 
         listview = (ListView)ll.findViewById(R.id.listvie);
-        Custom_Adapter list_adapter = new Custom_Adapter(getActivity().getLayoutInflater(),datas,getContext());
+        Custom_Adapter list_adapter = new Custom_Adapter(getActivity().getLayoutInflater(),datas,getContext(),str);
         listview.setAdapter(list_adapter);
         return ll;
 

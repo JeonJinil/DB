@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,8 +21,7 @@ public class AdminItemListFragment extends Fragment {
     private MaterialAdapter adapter;
     private DBHelper db;
 
-    public AdminItemListFragment() {
-    }
+    public AdminItemListFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,16 +40,18 @@ public class AdminItemListFragment extends Fragment {
         }
         for(Integer i : itemList) {
             item = db.materialSearchById(i.intValue());
-            if(item.getFood_name() != "null") adapter.addItem(item);
-//            Toast.makeText(v.getContext(),item.getFood_name(),Toast.LENGTH_SHORT).show();
+            if(item.getName() != "null") adapter.addItem(item);
         }
 
         return v;
     }
 
-    public void updateMaterial(){
+    public int updateMaterial(){
         ArrayList<MaterialListItem> list = adapter.getUpdateList();
-        db.updateMaterial(list);
-        Toast.makeText(getContext(),String.format("%d개 재료 정보를 수정하였습니다.", list.size()),Toast.LENGTH_SHORT).show();
+        int size = list.size();
+        if(size != 0){
+            db.updateMaterial(list);
+        }
+        return size;
     }
 }

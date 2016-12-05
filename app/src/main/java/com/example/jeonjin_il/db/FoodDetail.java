@@ -17,6 +17,7 @@ public class FoodDetail extends AppCompatActivity {
     TextView text_foodname , text_foodhow ;
     ScrollView sc;
     Button buy;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class FoodDetail extends AppCompatActivity {
         int food_icon = intent.getExtras().getInt("Food_icon");
         final String food_name = intent.getExtras().getString("Food_name");
         String food_how = intent.getExtras().getString("Food_how");
-
+        id = intent.getStringExtra("ID");
         sc = (ScrollView) findViewById(R.id.fooddetail_layout);
         text_foodname = (TextView) findViewById(R.id.fooddetail_name);
         text_foodhow = (TextView) findViewById(R.id.fooddetail_how);
@@ -38,10 +39,9 @@ public class FoodDetail extends AppCompatActivity {
         buy.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplication(), "재료를 장바구니에 삽입했습니다", Toast.LENGTH_SHORT).show();
                 DBHelper dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
-                Toast.makeText(getApplicationContext(),"아직 구현안했지롱 ",Toast.LENGTH_LONG).show();
-
-                dbHelper.fooddetail_Buy("user01",food_name);
+                dbHelper.fooddetail_Buy(id,food_name);
             }
         });
         Button timer = (Button)findViewById(R.id.timer_button);

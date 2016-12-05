@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -61,11 +62,14 @@ public class MaterialAdapter extends BaseAdapter {
         // TextView에 현재 position의 문자열 추가
         MaterialListItem item = m_List.get(position);
         final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.chbx_item);
-        checkBox.setText(item.getFood_name());
+        checkBox.setText(item.getName());
 
         final EditText editText = (EditText) convertView.findViewById(R.id.et_adminRemain);
         editText.setText(String.valueOf(item.getRemain()));
         editText.setHint(String.valueOf(item.getRemain()));
+
+        TextView tvDate = (TextView) convertView.findViewById(R.id.tv_adminDate);
+        tvDate.setText(item.getDate());
 
         // 버튼을 터치 했을 때 이벤트 발생
         Button btnMinus = (Button) convertView.findViewById(R.id.btn_adminMinus);

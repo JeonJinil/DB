@@ -17,12 +17,15 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
     private Button[] mbutton = new Button[9];
     private String[] data = new String[9];
     DBHelper dbHelper;
-
+    String id = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodsearch_ref);
         inti();
+        Intent intent = getIntent();
+        id = intent.getStringExtra("ID");
+
     }
 
 
@@ -38,6 +41,7 @@ public class FoodSearch_Ref extends AppCompatActivity implements View.OnClickLis
                 else {
                     Intent intent = new Intent(getApplication(),FoodSearch_Ref_activity.class);
                     intent.putExtra("food_id",food_id);
+                    intent.putExtra("ID",id);
                     startActivity(intent);
                 }
             }

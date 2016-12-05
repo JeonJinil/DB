@@ -8,6 +8,7 @@ public class MaterialListItem {
     private boolean checked = false;
     private String name;
     private int remain;
+    private String date;
 
     public void toggle() { checked = !checked; }
 
@@ -19,11 +20,19 @@ public class MaterialListItem {
         this.remain = remain;
     }
 
-    public String getFood_name() {
+    public String getName() {
         return name;
     }
 
-    public void setFood_name(String name) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

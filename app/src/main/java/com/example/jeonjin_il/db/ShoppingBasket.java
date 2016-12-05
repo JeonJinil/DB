@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class ShoppingBasket extends AppCompatActivity {
     DBHelper dbHelper;
     MyAdapter dataAdapter=null;
-
+    String id;
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +38,10 @@ public class ShoppingBasket extends AppCompatActivity {
     }
     private void displayListView()
     {
+        Intent intent = getIntent();
+         id = intent.getStringExtra("ID");
         dbHelper = new DBHelper(getApplicationContext(),"FOOD1.db",null,1);
-
-        ArrayList<ShoppingItem> ShoppingList= dbHelper.material_list("user01");
+        ArrayList<ShoppingItem> ShoppingList= dbHelper.material_list(id);
 
         dataAdapter=new MyAdapter(this,R.layout.activity_shoppingitem,ShoppingList);
         ListView listView=(ListView)findViewById(R.id.shopping_list);
@@ -152,7 +153,7 @@ public class ShoppingBasket extends AppCompatActivity {
                         if (item.isSelected()) {
                             price = 0;
                             responseText.append("\n" + item.getName() + " " + item.getBuynum() + "개");
-                                price = db.updateBasket("user01", item.getName(), item.getNum(), item.getBuynum());
+                                price = db.updateBasket(id, item.getName(), item.getNum(), item.getBuynum());
                                 item.setNum(item.getNum() - item.getBuynum());
                                 price = price * item.getBuynum();
                                 total_price = total_price + price;

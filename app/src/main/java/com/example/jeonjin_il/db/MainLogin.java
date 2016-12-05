@@ -75,6 +75,7 @@ public class MainLogin extends AppCompatActivity {
         db.material_insert("메추리알","고기",5,2000,"2016-12-05");
         db.material_insert("마요네즈","조미료",5,2000,"2016-12-05");
         db.material_insert("고추","야채",5,2000,"2016-12-05");       //25
+        db.material_insert("마케로니","떡",5,5600,"2016-12-05");
 
 //음식
         db.food_insert("라볶이","분식");
@@ -87,18 +88,18 @@ public class MainLogin extends AppCompatActivity {
         db.food_insert("베이컨감자찜","양식");
 
 //레시피당 들가는 재료
-        db.recipe_insert(0,0);
-        db.recipe_insert(0,1);
-        db.recipe_insert(0,2);
-        db.recipe_insert(0,3);
-        db.recipe_insert(0,4);
-
-        db.recipe_insert(1,5);
-        db.recipe_insert(1,6);
-        db.recipe_insert(1,7);
+        db.recipe_insert(1,0);
+        db.recipe_insert(1,1);
+        db.recipe_insert(1,2);
         db.recipe_insert(1,3);
-        db.recipe_insert(1,8);
-        db.recipe_insert(1,9);
+        db.recipe_insert(1,4);
+
+        db.recipe_insert(0,5);
+        db.recipe_insert(0,6);
+        db.recipe_insert(0,7);
+        db.recipe_insert(0,3);
+        db.recipe_insert(0,8);
+        db.recipe_insert(0,9);
 
         db.recipe_insert(2,7);
         db.recipe_insert(2,10);
@@ -135,6 +136,7 @@ public class MainLogin extends AppCompatActivity {
         db.recipe_insert(7,23);
         db.recipe_insert(7,24);
         db.recipe_insert(7,18);
+        db.recipe_insert(2,26);
 
 //해시
         db.hash_insert(0,"분식");
@@ -177,20 +179,20 @@ public class MainLogin extends AppCompatActivity {
 
         int result = dbHelper.Login(id,pw);
         if(result == -1){
-            Toast.makeText(getApplicationContext(),"응 아니야~",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"잘못된 접근입니다.",Toast.LENGTH_SHORT).show();
         }else if(Objects.equals(id, "admin")) {
-            Toast.makeText(getApplicationContext(), "응 관리자~",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "안녕하세요, 관리자님.",Toast.LENGTH_SHORT).show();
             Intent adminIntent = new Intent(this,MainAdmin.class);
-            startActivity(adminIntent);
 
+            startActivity(adminIntent);
         }
         else{
-            Toast.makeText(getApplicationContext(),"응 맞아~",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"안녕하세요~",Toast.LENGTH_SHORT).show();
             Intent guestIntent = new Intent(this, MainActivity.class);
+            guestIntent.putExtra("ID",id);
             startActivity(guestIntent);
 
         }
-
 
 
     }

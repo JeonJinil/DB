@@ -24,7 +24,7 @@ public class FoodSearch_Ref_activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         ArrayList<Integer> food_id = intent.getIntegerArrayListExtra("food_id");
-
+        String str = intent.getStringExtra("ID");
         for(int i=0;i<food_id.size();i++){
             random_icon = getResources().getIdentifier("@drawable/food_" + food_id.get(i), "drawable", "com.example.jeonjin_il.db");
             random_how = getResources().getIdentifier("@raw/howfood_"+food_id.get(i), "raw", "com.example.jeonjin_il.db");
@@ -34,7 +34,7 @@ public class FoodSearch_Ref_activity extends AppCompatActivity {
         }
 
         listview = (ListView)findViewById(R.id.ref_listv);
-        Custom_Adapter list_adapter = new Custom_Adapter(getLayoutInflater(),datas, getApplicationContext());
+        Custom_Adapter list_adapter = new Custom_Adapter(getLayoutInflater(),datas, getApplicationContext(),str);
         listview.setAdapter(list_adapter);
 
     }

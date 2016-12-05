@@ -3,11 +3,13 @@ package com.example.jeonjin_il.db;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -32,6 +34,9 @@ public class chinaFragment extends Fragment  {
                              Bundle savedInstanceState) {
         inflater.inflate(R.layout.fragment_china, container, false);
         // Inflate the layout for this fragment
+
+        String str = getArguments().getString("ID");
+        Log.i("TAG",str);
         LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.fragment_china, container, false);
 
         datas.add(new FoodListItem(R.drawable.food_2,readTxt(R.raw.namefood_2),readTxt(R.raw.howfood_2)));
@@ -39,7 +44,7 @@ public class chinaFragment extends Fragment  {
 
 
         listview = (ListView)ll.findViewById(R.id.listvie);
-        Custom_Adapter list_adapter = new Custom_Adapter(getActivity().getLayoutInflater(),datas,getContext());
+        Custom_Adapter list_adapter = new Custom_Adapter(getActivity().getLayoutInflater(),datas,getContext(),str);
         listview.setAdapter(list_adapter);
         return ll;
 

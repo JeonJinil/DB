@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.ss.bottomnavigation.BottomNavigation;
 import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
@@ -14,7 +15,8 @@ import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
 public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction transaction;
-
+    String id;
+    Bundle bundle;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -29,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         case R.id.action_fridge:
             Intent intent_ref = new Intent(getApplication(),FoodSearch_Ref.class);
+            intent_ref.putExtra("ID",id);
             startActivity(intent_ref);
             return true;
         case R.id.action_cart:
             Intent intent_cart=  new Intent(this,ShoppingBasket.class);
+            intent_cart.putExtra("ID",id);
             startActivity(intent_cart);
             return true;
 
@@ -53,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent intent = getIntent();
+        id = intent.getStringExtra("ID");
+        Toast.makeText(this,id+" 님 어서오세요",Toast.LENGTH_LONG).show();
 
 
         BottomNavigation bottomNavigation=(BottomNavigation)findViewById(R.id.bottom_navigation);
@@ -63,26 +69,41 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnSelectedItemChangeListener(new OnSelectedItemChangeListener() {
             @Override
             public void onSelectedItemChanged(int itemId) {
+
+                bundle = new Bundle();
+                bundle.putString("ID",id);
+
                 switch (itemId){
                     case R.id.tab_home:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new chinaFragment());
+                        chinaFragment china = new chinaFragment();
+                        china.setArguments(bundle);
+                        transaction.replace(R.id.frame_fragment_containers,china);
+
                         break;
                     case R.id.tab_images:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new koreaFragment());
+                        koreaFragment korea = new koreaFragment();
+                        korea.setArguments(bundle);
+                        transaction.replace(R.id.frame_fragment_containers,korea);
                         break;
                     case R.id.tab_main:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new mainFragment());
+                        mainFragment main = new mainFragment();
+                        main.setArguments(bundle);
+                        transaction.replace(R.id.frame_fragment_containers,main);
                         break;
                     case R.id.tab_products:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new westernFragment());
+                        westernFragment western = new westernFragment();
+                        western.setArguments(bundle);
+                        transaction.replace(R.id.frame_fragment_containers,western);
                         break;
                     case R.id.tab_more:
                         transaction=getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_fragment_containers,new SnackFragment());
+                        SnackFragment snack = new SnackFragment();
+                        snack.setArguments(bundle);
+                        transaction.replace(R.id.frame_fragment_containers, snack);
                         break;
                 }
                 transaction.commit();
